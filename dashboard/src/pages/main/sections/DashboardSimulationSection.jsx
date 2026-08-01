@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const DashboardSimulationSection = () => {
   const sectionRef = useRef(null);
@@ -48,6 +48,7 @@ const DashboardSimulationSection = () => {
           gap: 12px;
           width: 220px;
           flex-shrink: 0;
+          align-self: flex-start;
         }
         .lp-sim-tab-btn {
           padding: 14px 20px;
@@ -61,6 +62,10 @@ const DashboardSimulationSection = () => {
           align-items: center;
           gap: 12px;
           transition: all 0.2s ease;
+          height: 48px !important;
+          max-height: 48px !important;
+          flex: 0 0 auto !important;
+          box-sizing: border-box;
         }
         .lp-sim-window-wrap {
           flex: 1;
@@ -77,16 +82,31 @@ const DashboardSimulationSection = () => {
             flex-wrap: wrap;
             width: 100%;
             gap: 8px;
+            align-self: auto !important;
           }
           .lp-sim-tab-btn {
             justify-content: center;
-            flex: 1 1 calc(50% - 4px);
+            flex: 1 1 calc(50% - 4px) !important;
+            height: 44px !important;
+            max-height: 44px !important;
             padding: 10px 14px;
             font-size: 13px;
             gap: 8px;
           }
           .lp-sim-tab-btn:last-child {
-            flex: 1 1 100%;
+            flex: 1 1 100% !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .lp-sim-iframe {
+            height: clamp(380px, 78vh, 600px) !important;
+          }
+          .lp-sim-address-bar {
+            width: 85% !important;
+            font-size: 10px !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       `}</style>
@@ -245,6 +265,7 @@ const DashboardSimulationSection = () => {
 
               {/* Browser Address Bar */}
               <div
+                className="lp-sim-address-bar"
                 style={{
                   margin: '0 auto',
                   width: '60%',
@@ -271,6 +292,7 @@ const DashboardSimulationSection = () => {
 
             {/* Browser Iframe content */}
             <iframe
+              className="lp-sim-iframe"
               src={
                 activeTab === 'overview' 
                   ? '/simulation.html' 

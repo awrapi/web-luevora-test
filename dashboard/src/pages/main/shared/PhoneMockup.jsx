@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useThrottledMouseMove from './useThrottledMouseMove';
 
 const PhoneMockup = () => {
@@ -43,17 +43,15 @@ const PhoneMockup = () => {
   return (
     <>
       <style>{`
-        @keyframes shimmer-sweep {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
         @keyframes phone-reveal {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes skeleton-pulse {
-          0%, 100% { opacity: 0.7; }
-          50%       { opacity: 1; }
+        @media (max-width: 640px) {
+          .lp-phone-mockup-wrap {
+            height: clamp(280px, 75vw, 420px) !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
 
@@ -75,90 +73,6 @@ const PhoneMockup = () => {
           cursor: 'default',
         }}
       >
-        {/* â”€â”€ SKELETON (visible while image loads) â”€â”€ */}
-        {!imgLoaded && (
-          <div
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '100%',
-              maxWidth: '560px',
-              height: '480px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '16px',
-              animation: 'skeleton-pulse 1.8s ease-in-out infinite',
-              pointerEvents: 'none',
-              zIndex: 3,
-            }}
-          >
-            {/* Left phone skeleton */}
-            <div
-              style={{
-                position: 'relative',
-                width: '180px',
-                height: '360px',
-                borderRadius: '28px',
-                background: 'linear-gradient(135deg, #e8eef8 0%, #dce6f5 100%)',
-                overflow: 'hidden',
-                flexShrink: 0,
-                alignSelf: 'flex-end',
-                marginBottom: '20px',
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)',
-                animation: 'shimmer-sweep 1.6s ease-in-out infinite',
-              }} />
-            </div>
-            {/* Right phone skeleton */}
-            <div
-              style={{
-                position: 'relative',
-                width: '200px',
-                height: '420px',
-                borderRadius: '32px',
-                background: 'linear-gradient(135deg, #dce6f5 0%, #cdd9f0 100%)',
-                overflow: 'hidden',
-                flexShrink: 0,
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)',
-                animation: 'shimmer-sweep 1.6s ease-in-out infinite 0.3s',
-              }} />
-            </div>
-          </div>
-        )}
-
-        {/* Glow aura â€” perfectly circular so no hard rectangular edges show */}
-        <div
-          style={{
-            position: 'absolute',
-            right: '10%',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '500px',
-            height: '500px',
-            borderRadius: '50%',
-            background: isHovered
-              ? 'radial-gradient(circle, rgba(59,130,246,0.20) 0%, rgba(96,165,250,0.06) 55%, transparent 70%)'
-              : 'transparent',
-            transition: 'background 0.5s ease',
-            filter: 'blur(40px)',
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        />
-
-        {/* OUTER: fade-in reveal + drop-shadow (no 3D transform here = no blur) */}
         <div
           style={{
             position: 'relative',
@@ -174,7 +88,6 @@ const PhoneMockup = () => {
             transition: 'filter 0.4s ease',
           }}
         >
-          {/* INNER: 3D tilt only â€” no filter here prevents blur on GPU compositing */}
           <div
             style={{
               transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${isHovered ? 1.045 : 1})`,

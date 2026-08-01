@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const EcosystemFeatureMatrixSection = () => {
   const [selectedFeature, setSelectedFeature] = useState(null);
@@ -7,23 +7,23 @@ const EcosystemFeatureMatrixSection = () => {
   const rafRef = useRef(null);
 
   const features = [
-    { id: 1, title: 'Multi Branch System', category: 'Operations', desc: 'Pemisahan AI untuk Branch Sales, Support, dan CS yang terhubung 1 sama lain untuk koordinasi antar divisi.', details: ['Branch Sales Agent', 'Branch Support Agent', 'Branch CS Agent', 'Cross-branch Coordination', 'Unified CRM View'] },
-    { id: 2, title: 'Long Memory & Cross-Platform', category: 'Sales', desc: 'Mengingat detail customer lintas platform (WA, IG, FB, TikTok, Email) untuk layanan yang sangat personal.', details: ['WhatsApp History Sync', 'Instagram DM Memory', 'Facebook Messenger Log', 'Email Thread Tracking', 'Unified Customer Timeline'] },
-    { id: 3, title: 'Integrated CRM Engine', category: 'Sales', desc: 'Mencatat data customer otomatis dari percakapan, log pesan terakhir, dan catatan penting operasional.', details: ['Auto Contact Creation', 'Conversation History', 'Smart Contact Tags', 'Custom Notes', 'Broadcast Messaging', 'Follow-up Scheduling'] },
-    { id: 4, title: 'Automated Follow-Up & Tagging', category: 'Sales', desc: 'Tagging otomatis (Potential, Warm, Cold) & auto follow-up berkala untuk menaikkan konversi closing.', details: ['Auto Lead Scoring', 'Warm/Cold Tagging', 'Scheduled Follow-ups', 'Smart Reminders', 'Conversion Analytics'] },
-    { id: 5, title: 'Support Ticketing System', category: 'Operations', desc: 'Pembuatan tiket antrian khusus support jika ada keluhan spesifik customer yang butuh perhatian tim.', details: ['Auto Ticket Creation', 'Priority Queue', 'Agent Assignment', 'Resolution Tracking', 'Customer Feedback Loop'] },
-    { id: 6, title: 'Invoicing & Receipt Generator', category: 'Finance', desc: 'Canvas editor template invoice & receipt yang di-generate otomatis oleh AI saat transaksi berhasil.', details: ['Auto Invoice Generation', 'Custom Templates', 'PDF Export', 'Payment Link Embed', 'Tax Calculation'] },
-    { id: 7, title: 'Midtrans Payment Integration', category: 'Finance', desc: 'Integrasi payment gateway Midtrans untuk generate link pembayaran dan verifikasi otomatis.', details: ['Payment Link Generator', 'Auto Verification', 'Refund Processing', 'Multi-payment Methods', 'Settlement Reports'] },
-    { id: 8, title: 'Multi-Model Inventory Engine', category: 'Operations', desc: 'Mendukung berbagai model bisnis: slot jadwal, stock barang, reservasi meja, dan unit rental/travel.', details: ['Slot-based Inventory', 'Stock Management', 'Reservation System', 'Rental Unit Tracking', 'Real-time Availability'] },
-    { id: 9, title: 'Smart Scheduling & Reminders', category: 'Operations', desc: 'Pencatatan tanggal trip/unit, jadwal DP & pelunasan, serta auto follow-up tepat di tanggal target.', details: ['Trip Scheduling', 'Payment Reminders', 'Auto Follow-up', 'Calendar Integration', 'Overdue Alerts'] },
-    { id: 10, title: 'Flexible Persona & SOP', category: 'Sales', desc: 'Kustomisasi persona melayani, gaya bahasa, serta SOP bisnis sesuai aturan spesifik perusahaan.', details: ['Custom Persona Builder', 'Language Style Tuning', 'SOP Template Library', 'Rule-based Routing', 'Behavior Presets'] },
-    { id: 11, title: 'Real-Time Excel Sheet Sync', category: 'Integrations', desc: 'Sinkronisasi 2 arah file Excel bisnis yang di-update AI secara real-time saat berinteraksi dengan customer.', details: ['Bidirectional Sync', 'Real-time Updates', 'Google Sheets Support', 'Custom Mapping', 'Conflict Resolution'] },
-    { id: 12, title: 'Smart Pipeline Indicator', category: 'Sales', desc: 'Indikator visual posisi customer dalam pipeline penjualan (tahap eksplorasi hingga calon closing).', details: ['Visual Pipeline View', 'Stage Auto-detection', 'Progress Tracking', 'Bottleneck Alerts', 'Conversion Forecasting'] },
-    { id: 13, title: 'AI Agent Talk Session', category: 'Operations', desc: 'Onboarding wawancara mode teks & suara (voice call) untuk mengisi Knowledge Base & SOP bisnis.', details: ['Voice Interview Mode', 'Text Interview Mode', 'Auto KB Population', 'SOP Extraction', 'Quick Onboarding Flow'] },
-    { id: 14, title: 'Bring Your Old Data (PDF/Excel)', category: 'Integrations', desc: 'Upload file PDF/Excel data lama â†’ AI membaca dan memetakan otomatis ke CRM, Inventory, & Sheet.', details: ['PDF Data Extraction', 'Excel Import', 'Auto Field Mapping', 'Duplicate Detection', 'Bulk Import Support'] },
-    { id: 15, title: 'Interactive Business Copilot', category: 'Integrations', desc: 'Command agent untuk bisnis owner ("Berapa leads hari ini?", "Follow up Pak X", "Ubah data Y").', details: ['Natural Language Commands', 'Quick Actions', 'Data Lookup', 'Task Execution', 'Report Generation'] },
-    { id: 16, title: 'Human in the Loop (HITL)', category: 'Operations', desc: 'Dashboard approval interaktif jika AI menemukan request khusus di luar data SOP yang ada.', details: ['Approval Dashboard', 'Smart Escalation', 'Context Preservation', 'Manual Override', 'Audit Trail'] },
-    { id: 17, title: 'Telegram Smart Routing', category: 'Integrations', desc: 'Routing notifikasi & approval transaksi ke Telegram owner, manager, atau admin secara terpisah.', details: ['Multi-role Routing', 'Approval Notifications', 'Transaction Alerts', 'Status Updates', 'Command Responses'] },
+    { id: 1, title: 'Multi Branch System', category: 'Operations', desc: 'Separation of AI into Sales, Support, and CS Branch Agents connected for seamless cross-departmental coordination.', details: ['Branch Sales Agent', 'Branch Support Agent', 'Branch CS Agent', 'Cross-branch Coordination', 'Unified CRM View'] },
+    { id: 2, title: 'Long Memory & Cross-Platform', category: 'Sales', desc: 'Remembers customer details across platforms (WhatsApp, Instagram, Facebook, TikTok, Email) for deeply personalized service.', details: ['WhatsApp History Sync', 'Instagram DM Memory', 'Facebook Messenger Log', 'Email Thread Tracking', 'Unified Customer Timeline'] },
+    { id: 3, title: 'Integrated CRM Engine', category: 'Sales', desc: 'Automatically logs customer data from conversations, last message history, and key operational notes.', details: ['Auto Contact Creation', 'Conversation History', 'Smart Contact Tags', 'Custom Notes', 'Broadcast Messaging', 'Follow-up Scheduling'] },
+    { id: 4, title: 'Automated Follow-Up & Tagging', category: 'Sales', desc: 'Automated lead tagging (Potential, Warm, Cold) & scheduled auto follow-ups to increase conversion rates.', details: ['Auto Lead Scoring', 'Warm/Cold Tagging', 'Scheduled Follow-ups', 'Smart Reminders', 'Conversion Analytics'] },
+    { id: 5, title: 'Support Ticketing System', category: 'Operations', desc: 'Dedicated support queue ticket creation whenever customers have specific issues requiring team attention.', details: ['Auto Ticket Creation', 'Priority Queue', 'Agent Assignment', 'Resolution Tracking', 'Customer Feedback Loop'] },
+    { id: 6, title: 'Invoicing & Receipt Generator', category: 'Finance', desc: 'Canvas editor for invoice & receipt templates generated automatically by AI upon successful transactions.', details: ['Auto Invoice Generation', 'Custom Templates', 'PDF Export', 'Payment Link Embed', 'Tax Calculation'] },
+    { id: 7, title: 'Midtrans Payment Integration', category: 'Finance', desc: 'Midtrans payment gateway integration to generate payment links and verify transactions automatically.', details: ['Payment Link Generator', 'Auto Verification', 'Refund Processing', 'Multi-payment Methods', 'Settlement Reports'] },
+    { id: 8, title: 'Multi-Model Inventory Engine', category: 'Operations', desc: 'Supports diverse business models: schedule slots, product stock, table reservations, and rental/travel units.', details: ['Slot-based Inventory', 'Stock Management', 'Reservation System', 'Rental Unit Tracking', 'Real-time Availability'] },
+    { id: 9, title: 'Smart Scheduling & Reminders', category: 'Operations', desc: 'Tracks trip dates, deposit/installment schedules, and triggers auto follow-ups right on target dates.', details: ['Trip Scheduling', 'Payment Reminders', 'Auto Follow-up', 'Calendar Integration', 'Overdue Alerts'] },
+    { id: 10, title: 'Flexible Persona & SOP', category: 'Sales', desc: 'Customize service personas, tone of voice, and business SOPs according to company rules.', details: ['Custom Persona Builder', 'Language Style Tuning', 'SOP Template Library', 'Rule-based Routing', 'Behavior Presets'] },
+    { id: 11, title: 'Real-Time Excel Sheet Sync', category: 'Integrations', desc: 'Bidirectional sync for business Excel & Google Sheet files updated by AI in real time during customer interactions.', details: ['Bidirectional Sync', 'Real-time Updates', 'Google Sheets Support', 'Custom Mapping', 'Conflict Resolution'] },
+    { id: 12, title: 'Smart Pipeline Indicator', category: 'Sales', desc: 'Visual pipeline indicator tracking customer position (exploration stage to prospective closing).', details: ['Visual Pipeline View', 'Stage Auto-detection', 'Progress Tracking', 'Bottleneck Alerts', 'Conversion Forecasting'] },
+    { id: 13, title: 'AI Agent Talk Session', category: 'Operations', desc: 'Interactive text & voice call interview onboarding to populate your business Knowledge Base & SOPs.', details: ['Voice Interview Mode', 'Text Interview Mode', 'Auto KB Population', 'SOP Extraction', 'Quick Onboarding Flow'] },
+    { id: 14, title: 'Bring Your Old Data (PDF/Excel)', category: 'Integrations', desc: 'Upload legacy PDF/Excel files -> AI extracts and maps them automatically into CRM, Inventory, & Sheets.', details: ['PDF Data Extraction', 'Excel Import', 'Auto Field Mapping', 'Duplicate Detection', 'Bulk Import Support'] },
+    { id: 15, title: 'Interactive Business Copilot', category: 'Integrations', desc: 'Natural language copilot commands for business owners ("How many leads today?", "Follow up John", "Update item Y").', details: ['Natural Language Commands', 'Quick Actions', 'Data Lookup', 'Task Execution', 'Report Generation'] },
+    { id: 16, title: 'Human in the Loop (HITL)', category: 'Operations', desc: 'Interactive approval dashboard whenever AI encounters edge-case requests outside standard SOPs.', details: ['Approval Dashboard', 'Smart Escalation', 'Context Preservation', 'Manual Override', 'Audit Trail'] },
+    { id: 17, title: 'Telegram Smart Routing', category: 'Integrations', desc: 'Intelligent routing for transaction notifications & approvals sent separately to owners, managers, or admins.', details: ['Multi-role Routing', 'Approval Notifications', 'Transaction Alerts', 'Status Updates', 'Command Responses'] },
   ];
 
   // Split into two rows for marquee (interleave)
@@ -48,12 +48,12 @@ const EcosystemFeatureMatrixSection = () => {
       lastTime = time;
       const step = SPEED * (dt / 16.67);
 
-      // Row 1: scroll LEFT â€” content slides â†
+      // Row 1: scroll LEFT - content slides left
       pos1 += step;
       if (pos1 >= halfW1) pos1 -= halfW1;
       el1.style.transform = `translate3d(${-pos1}px, 0, 0)`;
 
-      // Row 2: scroll RIGHT â€” content slides â†’
+      // Row 2: scroll RIGHT - content slides right
       pos2 += step;
       if (pos2 >= halfW2) pos2 -= halfW2;
       el2.style.transform = `translate3d(${-halfW2 + pos2}px, 0, 0)`;
@@ -129,7 +129,6 @@ const EcosystemFeatureMatrixSection = () => {
                     {String(f.id).padStart(2, '0')}
                   </span>
                 </div>
-                {/* Content */}
                 <div style={{ padding: '20px 18px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6366f1', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{f.category}</div>
@@ -137,7 +136,7 @@ const EcosystemFeatureMatrixSection = () => {
                     <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
                   </div>
                   <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#6366f1', fontFamily: "'Satoshi', sans-serif" }}>
-                    Show More <span style={{ fontSize: 16, lineHeight: 1 }}>â†’</span>
+                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </div>
                 </div>
               </div>
@@ -145,7 +144,6 @@ const EcosystemFeatureMatrixSection = () => {
           </div>
         </div>
 
-        {/* Row 2 â€” scroll right (only on tablet+) */}
         <div className="marquee-row--mobile-hide" style={{ position: 'relative', zIndex: 2, overflow: 'hidden' }}>
           <div ref={marqueeRef2} className="marquee-row" style={{ display: 'flex', gap: 16, width: 'fit-content', padding: '0 24px' }}>
             {[...row2, ...row2].map((f, i) => (
@@ -168,7 +166,7 @@ const EcosystemFeatureMatrixSection = () => {
                     <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
                   </div>
                   <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#6366f1', fontFamily: "'Satoshi', sans-serif" }}>
-                    Show More <span style={{ fontSize: 16, lineHeight: 1 }}>â†’</span>
+                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </div>
                 </div>
               </div>
@@ -177,30 +175,41 @@ const EcosystemFeatureMatrixSection = () => {
         </div>
       </section>
 
-      {/* Modal / Drawer */}
       {selectedFeature && (
-        <div onClick={() => setSelectedFeature(null)} style={{
-          position: 'fixed', inset: 0, zIndex: 10000,
-          backgroundColor: 'rgba(15, 23, 42, 0.4)',
-          backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: 24, animation: 'modalBackdropIn 0.25s ease both',
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16,
         }}>
-          <div onClick={e => e.stopPropagation()} style={{
-            background: '#fff', borderRadius: 24, maxWidth: 560, width: '100%',
-            maxHeight: '80vh', overflow: 'hidden', display: 'flex', flexDirection: 'column',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.15)',
-            animation: 'modalCardIn 0.35s cubic-bezier(0.16,1,0.3,1) both',
+          <div onClick={() => setSelectedFeature(null)} style={{
+            position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.55)', backdropFilter: 'blur(6px)',
+            animation: 'modalBackdropIn 0.25s ease forwards',
+          }} />
+
+          <div style={{
+            position: 'relative', zIndex: 1, width: '100%', maxWidth: 520,
+            maxHeight: '90vh', display: 'flex', flexDirection: 'column',
+            background: '#ffffff', borderRadius: 24, boxShadow: '0 25px 60px -15px rgba(0,0,0,0.25)',
+            border: '1px solid #e2e8f0', overflow: 'hidden',
+            animation: 'modalCardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
           }}>
-            {/* Modal Header */}
-            <div style={{ padding: '28px 28px 20px', borderBottom: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6366f1', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{selectedFeature.category}</div>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', fontFamily: "'Satoshi', sans-serif", lineHeight: 1.3 }}>{selectedFeature.title}</h3>
-              <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, margin: 0 }}>{selectedFeature.desc}</p>
+            <div style={{ padding: '24px 28px 20px', borderBottom: '1px solid #e2e8f0', background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6366f1', background: '#e0e7ff', padding: '4px 12px', borderRadius: 999, fontFamily: "'Satoshi', sans-serif" }}>
+                  {selectedFeature.category}
+                </span>
+                <button onClick={() => setSelectedFeature(null)} style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', padding: 4, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', fontFamily: "'Satoshi', sans-serif", letterSpacing: '-0.02em' }}>
+                {selectedFeature.title}
+              </h3>
+              <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: 0 }}>
+                {selectedFeature.desc}
+              </p>
             </div>
 
-            {/* Modal Detail List */}
-            <div style={{ padding: '24px 28px', overflowY: 'auto', flex: 1 }}>
+            <div style={{ padding: '20px 24px', overflowY: 'auto', flex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {selectedFeature.details.map((d, i) => (
                   <div key={i} style={{
@@ -210,13 +219,13 @@ const EcosystemFeatureMatrixSection = () => {
                     fontSize: 14, color: '#334155', fontWeight: 500,
                     fontFamily: "'Satoshi', sans-serif",
                   }}>
-                    <span style={{ fontSize: 16, flexShrink: 0 }}>âœ¦</span> {d}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>{d}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Modal Footer */}
             <div style={{ padding: '16px 28px 24px', display: 'flex', justifyContent: 'flex-end', gap: 12, borderTop: '1px solid #e2e8f0' }}>
               <button onClick={() => setSelectedFeature(null)} style={{
                 padding: '10px 22px', fontSize: 14, fontWeight: 700, borderRadius: 999,

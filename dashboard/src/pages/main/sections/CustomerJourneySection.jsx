@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 const CustomerJourneySection = () => {
   return (
@@ -120,9 +120,27 @@ const CustomerJourneySection = () => {
               </div>
             ))}
 
-            <div style={{ marginTop: '12px' }}>
+            <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'flex-start' }}>
               <button
                 className="solid-btn-primary"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#0f172a',
+                  color: '#ffffff',
+                  padding: '14px 32px',
+                  fontSize: '15px',
+                  fontWeight: 700,
+                  borderRadius: '999px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: "'Satoshi', sans-serif",
+                  height: 'auto',
+                  maxHeight: '52px',
+                  width: 'fit-content',
+                  boxSizing: 'border-box',
+                }}
                 onClick={() => window.location.href = '/register'}
               >
                 Start Free Trial

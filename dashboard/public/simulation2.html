@@ -1259,15 +1259,15 @@
         ];
 
         const stages = [
-            { id: 'eksplorasi', title: 'Eksplorasi', sub: 'Customer baru, mencari informasi umum', color: '#10B981', glow: 'rgba(16,185,129,0.35)', icon: '1' },
-            { id: 'diskusi', title: 'Diskusi Jadwal', sub: 'Membahas slot & dokter yang tersedia', color: '#3B82F6', glow: 'rgba(59,130,246,0.35)', icon: '2' },
-            { id: 'negosiasi', title: 'Negosiasi', sub: 'Tawar-menawar jadwal reservasi', color: '#F59E0B', glow: 'rgba(245,158,11,0.35)', icon: '3' },
-            { id: 'registrasi', title: 'Registrasi Reservasi', sub: 'Pendataan permintaan reservasi customer', color: '#8B5CF6', glow: 'rgba(139,92,246,0.35)', icon: '4' },
+            { id: 'eksplorasi', title: 'Exploration', sub: 'New customer, looking for general information', color: '#10B981', glow: 'rgba(16,185,129,0.35)', icon: '1' },
+            { id: 'diskusi', title: 'Schedule Discussion', sub: 'Discussing available slots & specialists', color: '#3B82F6', glow: 'rgba(59,130,246,0.35)', icon: '2' },
+            { id: 'negosiasi', title: 'Negotiation', sub: 'Reservation schedule negotiation', color: '#F59E0B', glow: 'rgba(245,158,11,0.35)', icon: '3' },
+            { id: 'registrasi', title: 'Reservation Booking', sub: 'Recording customer reservation request', color: '#8B5CF6', glow: 'rgba(139,92,246,0.35)', icon: '4' },
             {
-                id: 'menunggu', title: 'Menunggu Persetujuan', sub: 'AI tidak akan lanjut sampai tim menyetujui', color: '#6366F1', glow: 'rgba(99,102,241,0.35)', icon: '5',
-                checklist: [{ id: 'jadwal', label: 'Menunggu konfirmasi tim untuk jadwal di luar jam operasional' }]
+                id: 'menunggu', title: 'Awaiting Approval', sub: 'AI pauses until team approves request', color: '#6366F1', glow: 'rgba(99,102,241,0.35)', icon: '5',
+                checklist: [{ id: 'jadwal', label: 'Awaiting team confirmation for off-hours request' }]
             },
-            { id: 'closing', title: 'Closing', sub: 'Reservasi disetujui & dikonfirmasi', color: '#059669', glow: 'rgba(5,150,105,0.35)', icon: '6' },
+            { id: 'closing', title: 'Won Deal', sub: 'Reservation approved & confirmed', color: '#059669', glow: 'rgba(5,150,105,0.35)', icon: '6' },
         ];
 
         /* ============================================================
@@ -1568,11 +1568,11 @@
                 addMessage('out', 'oke ditunggu sebentar ya biar saya follow up tim untuk ini');
                 await wait(900);
 
-                setStageState('registrasi', 'done'); setStageState('menunggu', 'active'); updatePhase('Menunggu Persetujuan');
-                updateLeadBadge('Menunggu Approval', '#E0E7FF', '#4338CA');
+                setStageState('registrasi', 'done'); setStageState('menunggu', 'active'); updatePhase('Awaiting Approval');
+                updateLeadBadge('Pending Approval', '#E0E7FF', '#4338CA');
                 await wait(600);
 
-                showSystemNote('Menunggu persetujuan tim...');
+                showSystemNote('Awaiting team approval...');
                 await wait(2400);
                 hideSystemNote();
 

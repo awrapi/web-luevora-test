@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import LazySection from './shared/LazySection';
 import LaptopMockup from './shared/LaptopMockup';
 import AgentTalkMockup from './shared/AgentTalkMockup';
@@ -868,9 +868,6 @@ const LandingPage = () => {
 
       {/* ─── DASHBOARD SIMULATION SECTION ───────────── */}
       <LazySection><DashboardSimulationSection /></LazySection>
-
-      {/* ─── TRANSFORMATION SECTION ──────────────────── */}
-      <LazySection><TransformationSection /></LazySection>
 
       {/* ─── Agent Talk Session SECTION ─────────────────────── */}
       <LazySection assets={['/assets/agent-talk.png']}>

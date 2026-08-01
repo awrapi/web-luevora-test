@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PhoneMockup from '../shared/PhoneMockup';
 
 const NewHeroSection = () => {
@@ -45,6 +45,22 @@ const NewHeroSection = () => {
           border-color: #94a3b8;
           transform: translateY(-2px);
         }
+        @media (max-width: 640px) {
+          .lp-new-hero-section {
+            padding: 90px 16px 40px !important;
+            min-height: auto !important;
+          }
+          .hero-cta-btn-wrap {
+            width: 100% !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+          .solid-btn-primary, .btn-secondary-light {
+            width: 100% !important;
+            text-align: center !important;
+            justify-content: center !important;
+          }
+        }
       `}</style>
 
       <section
@@ -76,22 +92,22 @@ const NewHeroSection = () => {
             width: '100%',
             margin: '0 auto',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '36px',
             alignItems: 'center',
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'none' : 'translateY(30px)',
             transition: 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', width: '100%' }}>
             <h1
               style={{
-                fontSize: 'clamp(36px, 5.5vw, 68px)',
-                fontWeight: 900,
+                fontSize: 'clamp(32px, 5.2vw, 64px)',
+                fontWeight: 800,
                 color: '#0f172a',
                 lineHeight: 1.1,
-                letterSpacing: '-0.035em',
+                letterSpacing: '-0.03em',
                 margin: '0 0 20px',
                 textAlign: 'left',
                 fontFamily: "'Satoshi', sans-serif",
@@ -103,10 +119,10 @@ const NewHeroSection = () => {
 
             <p
               style={{
-                fontSize: 'clamp(15px, 1.25vw, 19px)',
+                fontSize: 'clamp(14px, 1.25vw, 19px)',
                 color: '#475569',
                 lineHeight: 1.65,
-                margin: '0 0 38px',
+                margin: '0 0 32px',
                 maxWidth: '560px',
                 textAlign: 'left',
                 fontWeight: 500,
@@ -117,6 +133,7 @@ const NewHeroSection = () => {
             </p>
 
             <div
+              className="hero-cta-btn-wrap"
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',

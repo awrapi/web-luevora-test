@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const FAQSection = () => {
   const sectionRef = useRef(null);
@@ -58,17 +58,30 @@ const FAQSection = () => {
               borderBottom: i < faqs.length - 1 ? '1px dotted #e2e8f0' : 'none',
             }}>
               <button onClick={() => setOpenIdx(openIdx === i ? null : i)} style={{
-                width: '100%', background: 'none', border: 'none', padding: '18px 0',
+                width: '100%', height: 'auto', minHeight: '44px', maxHeight: 'none', background: 'none', border: 'none', padding: '18px 0',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 cursor: 'pointer', fontSize: 16, fontWeight: 600, color: '#0f172a',
                 fontFamily: "'Satoshi', sans-serif", textAlign: 'left',
               }}>
                 {faq.q}
-                <span style={{
-                  fontSize: 13, transition: 'transform 0.25s ease',
-                  transform: openIdx === i ? 'rotate(180deg)' : 'rotate(0deg)',
-                  color: '#6366f1', fontWeight: 500,
-                }}>â–¼</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6366f1"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{
+                    transition: 'transform 0.25s ease',
+                    transform: openIdx === i ? 'rotate(180deg)' : 'rotate(0deg)',
+                    flexShrink: 0,
+                    marginLeft: 12,
+                  }}
+                >
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
               </button>
               <div style={{
                 maxHeight: openIdx === i ? 200 : 0, overflow: 'hidden',

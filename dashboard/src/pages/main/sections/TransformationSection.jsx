@@ -1,4 +1,5 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+// Updated TransformationSection - English Metrics
+import React, { useState, useEffect, useRef } from 'react';
 
 const TransformationSection = () => {
   const sectionRef = useRef(null);
@@ -43,10 +44,10 @@ const TransformationSection = () => {
   ];
 
   const metrics = [
-    { value: 'Jauh Lebih Hemat', label: 'Dibanding hire tim CS penuh' },
-    { value: '24/7', label: 'Tidak pernah tutup, tidak pernah libur' },
-    { value: 'Tak Terbatas', label: 'Kapasitas handling ribuan chat' },
-    { value: '1 Admin', label: 'Kamu tetap boss â€” Luevora eksekusi' },
+    { value: 'Significantly Cheaper', label: 'Compared to hiring full-time CS staff' },
+    { value: '24/7 Availability', label: 'Never closes, never takes a day off' },
+    { value: 'Unlimited Scale', label: 'Handles thousands of simultaneous chats' },
+    { value: '1 Owner Control', label: 'You stay in control - Luevora executes' },
   ];
 
   return (
@@ -70,6 +71,29 @@ const TransformationSection = () => {
           display: grid;
           grid-template-columns: 1fr 56px 1fr;
           align-items: start;
+        }
+        .lp-metrics-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+        }
+        @media (max-width: 768px) {
+          .lp-metrics-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .lp-metrics-card {
+            border-bottom: 1px solid #e5e7eb !important;
+          }
+          .lp-metrics-card:nth-child(2n) {
+            border-right: none !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .lp-metrics-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .lp-metrics-card {
+            border-right: none !important;
+          }
         }
         .lp-comparison-arrow {
           display: flex;
@@ -108,7 +132,7 @@ const TransformationSection = () => {
         }
         @media (max-width: 900px) {
           .lp-comparison-section {
-            padding: 120px 20px 60px;
+            padding: 60px 16px 40px !important;
           }
           .lp-comparison-grid {
             grid-template-columns: 1fr;
@@ -408,26 +432,32 @@ const TransformationSection = () => {
         </div>
 
         {/* Metrics row */}
-        <div style={{
-          marginTop: '52px',
-          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-          border: '1px solid #e5e7eb', borderRadius: '12px', overflow: 'hidden',
-          opacity: isVisible ? 1 : 0,
-          animation: isVisible ? 'tf2-up 0.55s ease 0.65s both' : 'none',
-        }}>
+        <div
+          className="lp-metrics-grid"
+          style={{
+            marginTop: '52px',
+            border: '1px solid #e5e7eb', borderRadius: '12px', overflow: 'hidden',
+            opacity: isVisible ? 1 : 0,
+            animation: isVisible ? 'tf2-up 0.55s ease 0.65s both' : 'none',
+          }}
+        >
           {metrics.map((m, i) => (
-            <div key={i} style={{
-              backgroundColor: '#fff',
-              borderRight: i < metrics.length - 1 ? '1px solid #e5e7eb' : 'none',
-              padding: '28px 20px', textAlign: 'center',
-            }}>
+            <div
+              key={i}
+              className="lp-metrics-card"
+              style={{
+                backgroundColor: '#fff',
+                borderRight: i < metrics.length - 1 ? '1px solid #e5e7eb' : 'none',
+                padding: '24px 16px', textAlign: 'center',
+              }}
+            >
               <div style={{
-                fontSize: 'clamp(26px, 2.8vw, 36px)', fontWeight: 800,
-                color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: '8px',
+                fontSize: 'clamp(22px, 2.5vw, 36px)', fontWeight: 800,
+                color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '8px',
               }}>{m.value}</div>
               <div style={{
-                fontSize: '12px', color: '#94a3b8', lineHeight: 1.5,
-                maxWidth: '130px', margin: '0 auto',
+                fontSize: '12px', color: '#94a3b8', lineHeight: 1.4,
+                maxWidth: '180px', margin: '0 auto',
               }}>{m.label}</div>
             </div>
           ))}

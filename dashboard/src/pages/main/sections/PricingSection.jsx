@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const PricingSection = () => {
   const sectionRef = useRef(null);
@@ -42,7 +42,7 @@ const PricingSection = () => {
 
   return (
     <section ref={sectionRef} style={{
-      width: '100%', backgroundColor: '#ffffff', padding: '112px 20px 80px',
+      width: '100%', backgroundColor: '#ffffff', padding: '60px 16px 40px',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
     }}>
       <style>{`
@@ -50,14 +50,11 @@ const PricingSection = () => {
         .lp-price-card:hover { transform: translateY(-6px); }
         .lp-price-card:hover .lp-price-btn-outline { background: #f1f5f9; border-color: #6366f1; }
         .lp-price-card:hover .lp-price-btn-primary { box-shadow: 0 8px 24px rgba(99,102,241,0.35); }
-        .lp-pricing-toggle { border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 999px; padding: 4px; display: inline-flex; }
-        .lp-pricing-toggle-btn { border: none; background: transparent; padding: 10px 24px; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: 'Satoshi', sans-serif; cursor: pointer; color: #64748b; transition: all 0.2s ease; }
+        .lp-pricing-toggle { border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 999px; padding: 4px; display: inline-flex !important; flex-direction: row !important; align-items: center !important; height: 48px !important; max-height: 48px !important; box-sizing: border-box; }
+        .lp-pricing-toggle-btn { border: none; background: transparent; padding: 8px 24px !important; border-radius: 999px !important; font-size: 14px; font-weight: 700; font-family: 'Satoshi', sans-serif; cursor: pointer; color: #64748b; transition: all 0.2s ease; height: 40px !important; max-height: 40px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; flex: 0 0 auto !important; box-sizing: border-box; }
         .lp-pricing-toggle-btn.active { background: #6366f1; color: #fff; box-shadow: 0 2px 8px rgba(99,102,241,0.25); }
         @media (max-width: 768px) {
-          .lp-pricing-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 520px) {
-          .lp-pricing-grid { grid-template-columns: 1fr !important; }
+          .lp-pricing-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
         }
       `}</style>
 

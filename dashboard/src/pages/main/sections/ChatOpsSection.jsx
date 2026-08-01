@@ -1,11 +1,11 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ChatOpsPhoneMockup from '../shared/ChatOpsPhoneMockup';
 
 const ChatOpsSection = () => {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
 
-  /* Canvas dot-wave animation â€” replaces 392 DOM divs */
+  /* Canvas dot-wave animation - replaces 392 DOM divs */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -81,7 +81,7 @@ const ChatOpsSection = () => {
           <h2 style={{
             fontSize: 'clamp(26px, 2.8vw, 40px)', fontWeight: 800,
             color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.025em',
-          }}>Pantau dari HP.<br />Di Mana Saja.</h2>
+          }}>Monitor from Mobile.<br />Anywhere, Anytime.</h2>
           <p style={{
             fontSize: 'clamp(14px, 1.05vw, 16px)', color: '#475569',
             lineHeight: 1.8, margin: 0, maxWidth: '500px',

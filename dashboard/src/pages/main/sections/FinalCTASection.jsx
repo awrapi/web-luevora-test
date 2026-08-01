@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const FinalCTASection = () => {
   const sectionRef = useRef(null);
@@ -44,9 +44,6 @@ const FinalCTASection = () => {
             fontFamily: "'Satoshi', sans-serif", transition: 'transform 0.2s',
           }}>See Demo</a>
         </div>
-        <p style={{ fontSize: 14, color: '#94a3b8', margin: '24px 0 0' }}>
-          Join 200+ Founding Members
-        </p>
       </div>
     </section>
   );

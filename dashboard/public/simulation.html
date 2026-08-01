@@ -570,10 +570,10 @@
 
         <div class="page-header">
             <div>
-                <h1>Dashboard <span class="dummy-tag">● Data Dummy</span></h1>
-                <p>Ringkasan Penjualan & Performa AI Top Closer</p>
+                <h1>Dashboard <span class="dummy-tag">● Dummy Data</span></h1>
+                <p>Sales Summary & AI Top Closer Performance</p>
             </div>
-            <div class="range-select">Hari ini <span class="chev">▾</span></div>
+            <div class="range-select">Today <span class="chev">▾</span></div>
         </div>
 
         <!-- Stat cards -->
@@ -588,78 +588,78 @@
             </div>
             <div class="stat-card">
                 <div class="value" id="v-serius">14</div>
-                <div class="label">Pelanggan Serius</div>
+                <div class="label">Qualified Leads</div>
             </div>
             <div class="stat-card">
                 <div class="value" id="v-transaksi">18</div>
-                <div class="label">Total Transaksi</div>
+                <div class="label">Total Transactions</div>
             </div>
 
             <div class="stat-card">
                 <div class="value" id="v-menunggu">7</div>
-                <div class="label">Menunggu Bayar</div>
+                <div class="label">Awaiting Payment</div>
             </div>
             <div class="stat-card accent">
-                <div class="value" id="v-revenue">Rp 51,3jt</div>
-                <div class="label">Total Revenue (Omzet)</div>
+                <div class="value" id="v-revenue">Rp 51.3M</div>
+                <div class="label">Total Revenue</div>
             </div>
             <div class="stat-card accent">
                 <div class="value" id="v-rate">38%</div>
                 <div class="label">AI Closing Rate</div>
             </div>
             <div class="stat-card">
-                <div class="value" id="v-biaya">Rp 12.750</div>
-                <div class="label">Biaya AI per Closing</div>
+                <div class="value" id="v-biaya">Rp 12,750</div>
+                <div class="label">AI Cost per Closing</div>
             </div>
         </div>
 
         <div class="row2">
             <!-- Sales Funnel -->
             <div class="card">
-                <h3>Sales Funnel (Corong Penjualan)</h3>
+                <h3>Sales Funnel</h3>
                 <div id="funnel-container"></div>
             </div>
 
-            <!-- Tren Pendapatan -->
+            <!-- Revenue Trend -->
             <div class="card">
-                <h3>Tren Pendapatan & Interaksi</h3>
+                <h3>Revenue & Interaction Trend</h3>
                 <div class="chart-box"><canvas id="chartRevenue"></canvas></div>
             </div>
         </div>
 
-        <!-- Tren Leads -->
+        <!-- Leads Trend -->
         <div class="card" style="margin-bottom:16px;">
-            <h3>Tren Leads Baru & Repeat Order</h3>
+            <h3>New Leads & Repeat Order Trend</h3>
             <div class="chart-box"><canvas id="chartLeads"></canvas></div>
         </div>
 
         <div class="row3">
-            <!-- Top produk -->
+            <!-- Top products -->
             <div class="card">
-                <h3>Top 5 Produk/Layanan Terlaris</h3>
+                <h3>Top 5 Best-Selling Products/Services</h3>
                 <div id="product-list"></div>
             </div>
 
             <!-- Action center -->
             <div class="card">
-                <h3 style="display:flex; align-items:center; gap:8px;">⚠️ Action Center (Pusat Perhatian)</h3>
+                <h3 style="display:flex; align-items:center; gap:8px;">⚠️ Action Center</h3>
                 <div class="action-row danger">
                     <div class="action-icon">⚠</div>
                     <div class="action-text">
-                        <div class="title">AI Butuh Bantuan</div>
-                        <div class="sub">Percakapan yang perlu ditinjau manual</div>
+                        <div class="title">AI Needs Assistance</div>
+                        <div class="sub">Conversations requiring manual review</div>
                     </div>
                     <div class="action-badge">2</div>
-                    <button class="review-btn">Tinjau</button>
+                    <button class="review-btn">Review</button>
                 </div>
                 <div class="action-row warning">
                     <div class="action-icon">⏱</div>
                     <div class="action-text">
-                        <div class="title">Leads Terancam Ghosting</div>
-                        <div class="sub">Belum ada balasan lebih dari 12 jam</div>
+                        <div class="title">Leads at Risk of Ghosting</div>
+                        <div class="sub">No reply for over 12 hours</div>
                     </div>
                     <div class="action-badge">5</div>
-                    <button class="review-btn">Tinjau</button>
+                    <button class="review-btn">Review</button>
                 </div>
             </div>
         </div>
@@ -670,29 +670,29 @@
         /* ================= DUMMY DATA ================= */
         const hours = Array.from({ length: 16 }, (_, i) => String(i).padStart(2, '0') + ':00');
 
-        // Tren Pendapatan & Interaksi
+        // Revenue & Interaction Trend
         const volumePesan = [1, 0, 2, 3, 9, 6, 4, 7, 10, 13, 16, 12, 9, 14, 11, 8];
         const omzetHarian = [0, 0, 150000, 220000, 1800000, 1200000, 900000, 1600000, 2400000, 3600000, 5200000, 4100000, 2900000, 4700000, 3300000, 2100000];
 
-        // Tren Leads Baru & Repeat Order
+        // New Leads & Repeat Order Trend
         const leadsBaru = [0, 0, 1, 1, 3, 2, 2, 3, 4, 5, 6, 4, 3, 5, 4, 3];
         const repeatOrder = [0, 0, 0, 0, 1, 1, 0, 1, 2, 2, 3, 2, 2, 3, 2, 1];
 
         // Sales funnel
         const funnel = [
-            { name: 'Leads Baru', count: 48 },
-            { name: 'Prospek', count: 32 },
-            { name: 'Menunggu Bayar', count: 20 },
-            { name: 'Closing', count: 18 },
+            { name: 'New Leads', count: 48 },
+            { name: 'Prospects', count: 32 },
+            { name: 'Awaiting Payment', count: 20 },
+            { name: 'Won Deals', count: 18 },
         ];
 
-        // Top produk
+        // Top products
         const products = [
-            { name: 'Paket Skincare Glow Booster', qty: 42, revenue: 12600000 },
-            { name: 'Serum Vitamin C 20ml', qty: 35, revenue: 8750000 },
-            { name: 'Konsultasi Online Premium', qty: 28, revenue: 5600000 },
-            { name: 'Paket Bundling Program Diet', qty: 21, revenue: 6300000 },
-            { name: 'Membership VIP Bulanan', qty: 15, revenue: 4500000 },
+            { name: 'Glow Booster Skincare Package', qty: 42, revenue: 12600000 },
+            { name: 'Vitamin C Serum 20ml', qty: 35, revenue: 8750000 },
+            { name: 'Premium Online Consultation', qty: 28, revenue: 5600000 },
+            { name: 'Diet Program Bundle Package', qty: 21, revenue: 6300000 },
+            { name: 'Monthly VIP Membership', qty: 15, revenue: 4500000 },
         ];
 
         /* ================= RENDER FUNNEL ================= */
@@ -715,7 +715,7 @@
         /* ================= RENDER TOP PRODUCTS ================= */
         const prodEl = document.getElementById('product-list');
         const maxQty = Math.max(...products.map(p => p.qty));
-        const rupiah = n => 'Rp ' + n.toLocaleString('id-ID');
+        const rupiah = n => 'Rp ' + n.toLocaleString('en-US');
         products.forEach((p, i) => {
             const row = document.createElement('div');
             row.className = 'product-item';
@@ -726,7 +726,7 @@
       <div class="product-bar-track"><div class="product-bar-fill" style="width:${(p.qty / maxQty) * 100}%"></div></div>
     </div>
     <div class="product-meta">
-      <div class="qty">${p.qty} terjual</div>
+      <div class="qty">${p.qty} sold</div>
       <div class="rev">${rupiah(p.revenue)}</div>
     </div>
   `;
@@ -743,11 +743,11 @@
                 labels: hours,
                 datasets: [
                     {
-                        type: 'bar', label: 'Volume Pesan', data: volumePesan,
+                        type: 'bar', label: 'Message Volume', data: volumePesan,
                         backgroundColor: purpleLight, borderRadius: 4, yAxisID: 'y1', order: 2, barThickness: 14
                     },
                     {
-                        type: 'line', label: 'Omzet Harian', data: omzetHarian,
+                        type: 'line', label: 'Daily Revenue', data: omzetHarian,
                         borderColor: purple, backgroundColor: purple, pointRadius: 3, pointBackgroundColor: '#fff',
                         pointBorderColor: purple, pointBorderWidth: 2, tension: 0.35, yAxisID: 'y', order: 1
                     }
@@ -770,11 +770,11 @@
                 labels: hours,
                 datasets: [
                     {
-                        type: 'bar', label: 'Leads Baru', data: leadsBaru,
+                        type: 'bar', label: 'New Leads', data: leadsBaru,
                         backgroundColor: purpleLight, borderRadius: 4, order: 2, barThickness: 16
                     },
                     {
-                        type: 'line', label: 'Repeat Order', data: repeatOrder,
+                        type: 'line', label: 'Repeat Orders', data: repeatOrder,
                         borderColor: purple, backgroundColor: purple, pointRadius: 3, pointBackgroundColor: '#fff',
                         pointBorderColor: purple, pointBorderWidth: 2, tension: 0.35, order: 1
                     }
