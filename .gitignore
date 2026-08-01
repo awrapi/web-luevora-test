@@ -17,6 +17,9 @@ server/.env
 
 # Scratch and temporary root files (kept locally, not pushed to GitHub)
 simulation*.html
+!dashboard/public/simulation.html
+!dashboard/public/simulation2.html
+!dashboard/public/simulation3.html
 LUEVORA_UI_UX_MARKETING_UPGRADE.txt
 migration_summary.md
 split_modals.cjs

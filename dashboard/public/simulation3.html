@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human in the Loop — Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F1F2FA;
+            --card: #FFFFFF;
+            --primary: #5B4FE5;
+            --primary-dark: #4636C9;
+            --primary-light: #EEF0FE;
+            --text: #1D1B31;
+            --text-secondary: #74748C;
+            --border: #E7E8F3;
+            --success: #17A673;
+            --success-light: #E6F8F1;
+            --danger: #FF4D4F;
+            --warn-bg: #FFF4DC;
+            --warn-border: #FCE3AE;
+            --warn-text: #92610A;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-card: 0 1px 2px rgba(20, 20, 50, .04), 0 8px 24px -12px rgba(20, 20, 50, .10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 22px 24px 60px;
+        }
+
+        /* ---------- topbar ---------- */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 4px 20px;
+            margin-bottom: 6px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--primary-dark);
+        }
+
+        .topbar-left .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: inline-block;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-ask-ai {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 12.5px;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .admin-chip {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 5px 12px 5px 5px;
+        }
+
+        .avatar-sm {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logout {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: var(--primary-light);
+            border: 1px solid #DDE0FB;
+            padding: 5px 10px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        .live-tag .blink {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: blinkDot 1.4s ease-in-out infinite;
+        }
+
+        @keyframes blinkDot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .25;
+            }
+        }
+
+        /* ---------- header ---------- */
+        .dash-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .dash-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .dash-header .subtitle {
+            color: var(--text-secondary);
+            margin-top: 5px;
+            font-size: 13.5px;
+        }
+
+        .btn-refresh {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 9px 15px;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text);
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            cursor: default;
+        }
+
+        /* ---------- stats ---------- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .stat-label {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-size: 23px;
+            font-weight: 800;
+            color: var(--text);
+            font-variant-numeric: tabular-nums;
+            display: inline-block;
+        }
+
+        .stat-value.bump {
+            animation: bumpAnim .45s ease;
+        }
+
+        @keyframes bumpAnim {
+            0% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(1.28);
+                color: var(--primary);
+            }
+
+            100% {
+                transform: scale(1);
+                color: var(--text);
+            }
+        }
+
+        /* ---------- panels ---------- */
+        .panels-row {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-header h2 {
+            font-size: 14.5px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .panel-body {
+            padding: 14px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        /* ---------- customer card ---------- */
+        .customer-card {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 12px;
+            border-radius: var(--radius-md);
+            transition: background .3s;
+            position: relative;
+        }
+
+        .customer-card.highlight {
+            background: var(--primary-light);
+            animation: cardGlow 1.8s ease-in-out infinite;
+        }
+
+        @keyframes cardGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 1px var(--primary) inset, 0 0 0 0 rgba(91, 79, 229, .35);
+            }
+
+            50% {
+                box-shadow: 0 0 0 1px var(--primary) inset, 0 0 16px 3px rgba(91, 79, 229, .30);
+            }
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .customer-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .customer-name {
+            font-weight: 700;
+            font-size: 14.5px;
+        }
+
+        .customer-meta {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .badge-guider {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .btn-open {
+            margin-left: auto;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 8px 17px;
+            font-weight: 700;
+            font-size: 12.5px;
+            display: none;
+            align-items: center;
+            gap: 7px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            --pulse-rgb: 91, 79, 229;
+        }
+
+        .btn-open,
+        .btn-proceed {
+            cursor: pointer;
+            transition: filter .15s ease, transform .1s ease;
+        }
+
+        .btn-open:hover,
+        .btn-proceed:hover {
+            filter: brightness(1.06);
+        }
+
+        .btn-open:active,
+        .btn-proceed:active {
+            transform: scale(.97);
+        }
+
+        .btn-open.attention,
+        .btn-proceed.attention {
+            animation: pulseRing 1.5s infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                box-shadow: 0 0 0 0 rgba(var(--pulse-rgb), .55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 11px rgba(var(--pulse-rgb), 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(var(--pulse-rgb), 0);
+            }
+        }
+
+        .btn-open.attention::before,
+        .btn-proceed.attention::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .65), transparent);
+            transform: skewX(-20deg);
+            animation: shineSweep 1.8s ease-in-out infinite;
+        }
+
+        @keyframes shineSweep {
+            0% {
+                left: -60%;
+            }
+
+            60%,
+            100% {
+                left: 130%;
+            }
+        }
+
+        .ping-dot {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--danger);
+            box-shadow: 0 0 0 2px #fff;
+        }
+
+        .ping-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: pingAnim 1.4s cubic-bezier(0, 0, .2, 1) infinite;
+        }
+
+        @keyframes pingAnim {
+            0% {
+                transform: scale(1);
+                opacity: .7;
+            }
+
+            75%,
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- log panel ---------- */
+        .empty-log {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-secondary);
+            flex: 1;
+            gap: 5px;
+            padding: 30px 16px;
+        }
+
+        .empty-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .empty-title {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 13.5px;
+        }
+
+        .empty-sub {
+            font-size: 12.5px;
+        }
+
+        .log-list {
+            display: none;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .log-item {
+            display: flex;
+            gap: 9px;
+            padding: 11px 12px;
+            border: 1px solid #CDEFE0;
+            border-radius: var(--radius-md);
+            background: var(--success-light);
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
+        .log-item.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .log-icon {
+            color: var(--success);
+            font-size: 16px;
+            line-height: 1;
+            margin-top: 1px;
+        }
+
+        .log-text {
+            font-size: 12.5px;
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .log-time {
+            font-size: 10.5px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+        }
+
+        /* ---------- toast ---------- */
+        .toast {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: var(--shadow-card);
+            padding: 13px 17px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            transform: translateX(130%);
+            transition: transform .4s ease;
+            z-index: 60;
+            font-size: 13px;
+            font-weight: 600;
+            max-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* ---------- click feedback ---------- */
+        .click-ripple {
+            position: fixed;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(91, 79, 229, .5);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            z-index: 499;
+            animation: rippleAnim .55s ease-out forwards;
+        }
+
+        @keyframes rippleAnim {
+            to {
+                transform: translate(-50%, -50%) scale(3.4);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- overlay / modal ---------- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 40, .45);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease;
+            z-index: 200;
+            padding: 20px;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            width: min(560px, 94vw);
+            height: min(640px, 84vh);
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px -20px rgba(20, 20, 50, .35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(.93) translateY(10px);
+            transition: transform .32s ease;
+        }
+
+        .overlay.show .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .modal-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .modal-titles {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-name {
+            font-weight: 700;
+            font-size: 14.5px;
+        }
+
+        .modal-sub {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            line-height: 1.4;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-secondary);
+            cursor: default;
+            line-height: 1;
+            padding: 2px 4px;
+        }
+
+        .modal-body {
+            padding: 18px 20px;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .report-card {
+            background: var(--primary-light);
+            border: 1px solid #DEE0FB;
+            border-radius: var(--radius-md);
+            padding: 15px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .badge-laporan {
+            align-self: flex-start;
+            background: #fff;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 10.5px;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 999px;
+        }
+
+        .report-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .report-meta {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, .65);
+            padding: 8px 10px;
+            border-radius: 8px;
+            line-height: 1.55;
+        }
+
+        .decision-badge {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--warn-text);
+            background: var(--warn-bg);
+            border: 1px solid var(--warn-border);
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .chat-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .chat-msg {
+            max-width: 82%;
+            padding: 10px 13px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.55;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+
+        .chat-msg.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chat-msg.admin {
+            align-self: flex-end;
+            background: #1D1B31;
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-msg.ai {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .chat-time {
+            font-size: 9.5px;
+            opacity: .55;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .chat-msg.typing {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 13px 15px;
+        }
+
+        .chat-msg.typing .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            opacity: .4;
+            animation: dotBounce 1s infinite;
+        }
+
+        .chat-msg.typing .dot:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+        .chat-msg.typing .dot:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+        @keyframes dotBounce {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: .4;
+            }
+
+            30% {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
+
+        .todo-card {
+            background: var(--success-light);
+            border: 1px solid #BEEBD7;
+            border-radius: var(--radius-md);
+            padding: 15px 16px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
+        .todo-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .todo-header {
+            font-weight: 700;
+            color: var(--success);
+            font-size: 12.5px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .todo-text {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+        .btn-proceed {
+            align-self: flex-start;
+            background: var(--success);
+            color: #fff;
+            border: none;
+            padding: 9px 19px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12.5px;
+            position: relative;
+            overflow: hidden;
+            transition: background .2s;
+            --pulse-rgb: 23, 166, 115;
+        }
+
+        .btn-proceed.done {
+            background: var(--text-secondary);
+            cursor: default;
+            animation: none;
+        }
+
+        .modal-input-row {
+            display: flex;
+            gap: 9px;
+            padding: 13px 16px;
+            border-top: 1px solid var(--border);
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        #chatInput {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 13px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .btn-send {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            font-size: 15px;
+            flex-shrink: 0;
+            transition: transform .15s ease;
+        }
+
+        .btn-send.pulse-once {
+            transform: scale(.85);
+        }
+
+        @media (max-width:760px) {
+            .panels-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .topbar {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .admin-chip, .logout {
+                display: none !important;
+            }
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+            .stat-card {
+                padding: 10px 12px !important;
+            }
+            .stat-value {
+                font-size: 18px !important;
+            }
+            .dash-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .btn-refresh {
+                justify-content: center;
+            }
+            .panel {
+                min-height: 300px;
+            }
+            .overlay {
+                padding: 10px;
+            }
+            .modal {
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 12px !important;
+            }
+            .modal-titles {
+                max-width: 70%;
+            }
+            .report-card, .chat-thread, .todo-card {
+                padding: 12px !important;
+            }
+            .app {
+                padding: 12px 12px 40px !important;
+            }
+            .live-tag {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="topbar">
+            <div class="topbar-left"><span class="dot"></span> Luevora</div>
+            <div class="topbar-right">
+                <button class="btn-ask-ai">✨ Ask AI</button>
+                <div class="admin-chip"><span class="avatar-sm">DA</span> Dev Admin ▾</div>
+                <span class="logout">⏻ Logout</span>
+            </div>
+        </div>
+
+        <span class="live-tag"><span class="blink"></span> Live Demo — Human in the Loop (klik tombol yang
+            bersinar)</span>
+
+        <div class="dash-header">
+            <div>
+                <h1>Central Information</h1>
+                <p class="subtitle">Pusat informasi dan manajemen permintaan pelanggan</p>
+            </div>
+            <button class="btn-refresh">⟳ Refresh</button>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card"><span class="stat-label">Pelanggan</span><span class="stat-value"
+                    id="statPelanggan">1</span></div>
+            <div class="stat-card"><span class="stat-label">Bid</span><span class="stat-value" id="statBid">0</span>
+            </div>
+            <div class="stat-card"><span class="stat-label">Request</span><span class="stat-value"
+                    id="statRequest">0</span></div>
+            <div class="stat-card"><span class="stat-label">Guider</span><span class="stat-value"
+                    id="statGuider">1</span></div>
+            <div class="stat-card"><span class="stat-label">SysReq</span><span class="stat-value"
+                    id="statSysReq">0</span></div>
+            <div class="stat-card"><span class="stat-label">Data Request</span><span class="stat-value"
+                    id="statDataRequest">0</span></div>
+        </div>
+
+        <div class="panels-row">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Customer Management</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="customer-card" id="anwarCard">
+                        <div class="avatar">A</div>
+                        <div class="customer-info">
+                            <div class="customer-name">Anwar Faturrahman</div>
+                            <div class="customer-meta"><span class="badge-guider">1
+                                    Guider</span><span>·</span><span>open</span></div>
+                        </div>
+                        <button class="btn-open" id="openBtn"><span class="ping-dot"></span>Open</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Log</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="empty-log" id="emptyLog">
+                        <div class="empty-icon">📶</div>
+                        <div class="empty-title">Belum Ada Aktivitas</div>
+                        <div class="empty-sub">Log aktivitas akan muncul di sini.</div>
+                    </div>
+                    <div class="log-list" id="logList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-avatar">A</div>
+                <div class="modal-titles">
+                    <div class="modal-name">Anwar Faturrahman</div>
+                    <div class="modal-sub">akbarrizkyagizna · Customer meminta booking dr. Maya pukul 20.00 untuk facial
+                        (di luar jam operasional)</div>
+                </div>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="report-card">
+                    <span class="badge-laporan">📄 Laporan AI</span>
+                    <p class="report-text">Customer <b>Anwar Faturrahman</b> meminta reservasi pukul <b>20.00</b> dengan
+                        dokter Maya untuk melakukan <b>facial</b>. Permintaan ini berada di luar cakupan Knowledge Base
+                        karena jam operasional klinik yang tercatat hanya tersedia hingga pukul <b>19.00</b>. Sebagai
+                        catatan tambahan, Anwar Faturrahman merupakan customer loyal yang telah rutin melakukan
+                        reservasi dalam 3 bulan terakhir.</p>
+                    <div class="report-meta">📋 Data terkait: dokter_pref: dr. Maya · layanan: Facial · jadwal_request:
+                        20:00 · status_customer: Loyal (3 bulan terakhir)</div>
+                    <div class="decision-badge">❓ Perlu keputusan admin: approve reservasi di luar jam operasional
+                        klinik?</div>
+                </div>
+
+                <div class="chat-thread" id="chatThread"></div>
+
+                <div class="todo-card" id="todoCard">
+                    <div class="todo-header">✅ To-Do dari AI</div>
+                    <div class="todo-text">Beritahu customer bahwa request pukul <b>20.00</b> untuk facial bersama
+                        dokter Maya sudah <b>DISETUJUI</b>.</div>
+                    <button class="btn-proceed" id="proceedBtn">Proceed</button>
+                </div>
+            </div>
+            <div class="modal-input-row">
+                <input type="text" id="chatInput" placeholder="Ketik instruksi atau pesan..." disabled>
+                <button class="btn-send" id="sendBtn">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const $ = id => document.getElementById(id);
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+        const anwarCard = $('anwarCard');
+        const openBtn = $('openBtn');
+        const overlay = $('overlay');
+        const chatThread = $('chatThread');
+        const chatInput = $('chatInput');
+        const sendBtn = $('sendBtn');
+        const todoCard = $('todoCard');
+        const proceedBtn = $('proceedBtn');
+        const modalBody = $('modalBody');
+        const toast = $('toast');
+        const emptyLog = $('emptyLog');
+        const logList = $('logList');
+
+        function nowTime() {
+            const d = new Date();
+            return d.getHours().toString().padStart(2, '0') + '.' + d.getMinutes().toString().padStart(2, '0');
+        }
+
+        function bump(el) {
+            el.classList.remove('bump');
+            void el.offsetWidth;
+            el.classList.add('bump');
+        }
+        function setStat(id, val) {
+            const el = $(id);
+            el.textContent = val;
+            bump(el);
+        }
+        function setStatSilent(id, val) { $(id).textContent = val; }
+
+        function showToast(html, ms = 3000) {
+            toast.innerHTML = html;
+            toast.classList.add('show');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => toast.classList.remove('show'), ms);
+        }
+
+        function rippleAt(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 550);
+        }
+        // Waits for a real user click on el. Resolves once clicked, shows a ripple at the click point.
+        function waitForClick(el) {
+            return new Promise(resolve => {
+                function handler(e) {
+                    el.removeEventListener('click', handler);
+                    rippleAt(e.clientX, e.clientY);
+                    resolve();
+                }
+                el.addEventListener('click', handler);
+            });
+        }
+
+        function addChatMsg(role, html) {
+            const div = document.createElement('div');
+            div.className = 'chat-msg ' + role;
+            div.innerHTML = `<div>${html}</div><span class="chat-time">${nowTime()}</span>`;
+            chatThread.appendChild(div);
+            chatThread.scrollTop = chatThread.scrollHeight;
+            modalBody.scrollTop = modalBody.scrollHeight;
+            requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('in')));
+            return div;
+        }
+        function addTyping() {
+            const div = document.createElement('div');
+            div.className = 'chat-msg ai typing';
+            div.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+            chatThread.appendChild(div);
+            modalBody.scrollTop = modalBody.scrollHeight;
+            requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('in')));
+            return div;
+        }
+        async function typeInto(el, text, speed = 42) {
+            el.value = '';
+            for (const ch of text) {
+                el.value += ch;
+                await sleep(speed + Math.random() * 35);
+            }
+        }
+        function addLogEntry(html) {
+            emptyLog.style.display = 'none';
+            logList.style.display = 'flex';
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerHTML = `<span class="log-icon">✅</span><div><div class="log-text">${html}</div><div class="log-time">Baru saja</div></div>`;
+            logList.prepend(div);
+            requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('in')));
+        }
+
+        function resetAll() {
+            setStatSilent('statPelanggan', '1');
+            setStatSilent('statBid', '0');
+            setStatSilent('statRequest', '0');
+            setStatSilent('statGuider', '1');
+            setStatSilent('statSysReq', '0');
+            setStatSilent('statDataRequest', '0');
+
+            anwarCard.classList.remove('highlight');
+            openBtn.style.display = 'none';
+            openBtn.classList.remove('attention');
+
+            overlay.classList.remove('show');
+            chatThread.innerHTML = '';
+            todoCard.style.display = 'none';
+            todoCard.classList.remove('show');
+            proceedBtn.classList.remove('done');
+            proceedBtn.classList.remove('attention');
+            proceedBtn.textContent = 'Proceed';
+            chatInput.value = '';
+            chatInput.disabled = true;
+            modalBody.scrollTop = 0;
+
+            logList.innerHTML = '';
+            logList.style.display = 'none';
+            emptyLog.style.display = 'flex';
+
+            toast.classList.remove('show');
+        }
+
+        async function runDemo() {
+            while (true) {
+                resetAll();
+                await sleep(1800);
+
+                // Phase 1 — new request comes in
+                setStat('statRequest', '1');
+                setStat('statSysReq', '1');
+                anwarCard.classList.add('highlight');
+                await sleep(150);
+                openBtn.style.display = 'flex';
+                openBtn.classList.add('attention');
+                showToast('🔔 <span>Request baru dari <b>Anwar Faturrahman</b></span>', 4000);
+
+                // Phase 2 — wait for the admin (user) to click Open
+                await waitForClick(openBtn);
+                openBtn.classList.remove('attention');
+                overlay.classList.add('show');
+                await sleep(500);
+
+                // Phase 3 — chat discussion
+                await sleep(900);
+                addChatMsg('admin', 'kenapa nih???');
+                await sleep(1000);
+                const typing1 = addTyping();
+                await sleep(1700);
+                typing1.remove();
+                addChatMsg('ai', 'Begini pak, customer bernama <b>Anwar Faturrahman</b> meminta reservasi pukul <b>20.00</b> dengan dokter Maya untuk melakukan facial, yang mana data klinik menunjukkan jam operasional hanya sampai pukul <b>19.00</b>. Sebagai informasi tambahan, Anwar Faturrahman adalah customer loyal yang sudah rutin berlangganan selama 3 bulan terakhir. Bagaimana pak, di-approve atau tidak?');
+                await sleep(1600);
+
+                // admin replies
+                chatInput.disabled = false;
+                await typeInto(chatInput, 'oke approve aja');
+                await sleep(450);
+                sendBtn.classList.add('pulse-once');
+                await sleep(200);
+                sendBtn.classList.remove('pulse-once');
+                addChatMsg('admin', chatInput.value);
+                chatInput.value = '';
+                chatInput.disabled = true;
+                await sleep(1000);
+
+                // Phase 4 — AI generates to-do card
+                const typing2 = addTyping();
+                await sleep(1100);
+                typing2.remove();
+                todoCard.style.display = 'flex';
+                requestAnimationFrame(() => todoCard.classList.add('show'));
+                modalBody.scrollTop = modalBody.scrollHeight;
+                await sleep(500);
+                modalBody.scrollTo({ top: modalBody.scrollHeight, behavior: 'smooth' });
+                proceedBtn.classList.add('attention');
+
+                // Phase 5 — wait for the admin (user) to click Proceed
+                await waitForClick(proceedBtn);
+                proceedBtn.classList.remove('attention');
+                proceedBtn.textContent = 'Memproses...';
+                await sleep(1100);
+                proceedBtn.classList.add('done');
+                proceedBtn.textContent = '✓ Selesai';
+                await sleep(900);
+
+                // close popup
+                overlay.classList.remove('show');
+                await sleep(500);
+
+                // Phase 6 — log + stats update
+                addLogEntry('Reservasi disetujui — <b>Anwar Faturrahman</b>, facial bersama dr. Maya pukul 20:00 (di luar jam operasional, approved by admin).');
+                setStat('statRequest', '0');
+                anwarCard.classList.remove('highlight');
+                openBtn.style.display = 'none';
+
+                // hold before restarting the loop
+                await sleep(3800);
+            }
+        }
+
+        window.addEventListener('load', () => { runDemo(); });
+    </script>
+
+</body>
+
+</html>
