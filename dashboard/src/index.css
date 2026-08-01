@@ -1,0 +1,778 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Satoshi', 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Satoshi', 'Inter', 'Plus Jakarta Sans', sans-serif;
+  
+  --breakpoint-xs: 480px;
+
+  --color-bg-page: #f8f9fc;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f1f3f9;
+  --color-border-base: #e2e6ef;
+  --color-border-hover: #cdd3e0;
+  
+  --color-text-heading: #0f172a;
+  --color-text-body: #334155;
+  --color-text-muted: #64748b;
+  
+  --color-indigo-base: #6366f1;
+  --color-indigo-mid: #4f46e5;
+  --color-indigo-soft: #eef2ff;
+  --color-indigo-border: #c7d2fe;
+  
+  --color-wa-green: #075e54;
+  --color-wa-green-light: #128c7e;
+  --color-wa-teal: #25d366;
+  --color-wa-bg: #efeae2;
+  --color-wa-header: #075e54;
+  --color-wa-bubble-out: #d9fdd3;
+  --color-wa-bubble-in: #ffffff;
+
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+  
+  --shadow-xs: 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.05);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  html, body {
+    /* Use dvh for accurate mobile viewport height (excludes browser chrome) */
+    height: 100dvh;
+    overscroll-behavior: none;
+  }
+
+  body {
+    @apply bg-bg-page text-text-body font-sans antialiased;
+    font-size: 12.5px;
+    line-height: 1.4;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Allow landing page to scroll vertically */
+  html.landing-page-html, body.landing-page-body {
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100dvh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-text-heading font-bold;
+  }
+}
+
+/* Typing indicator bounce animation */
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* ── Modern AI Thinking Spinner ─────────────────────────────────── */
+@keyframes aiSpinnerRotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes aiSpinnerPulse {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.35; }
+}
+
+.ai-thinking-spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: rgba(99, 102, 241, 0.18);
+  border-top-color: #6366f1;
+  animation: aiSpinnerRotate 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+.ai-thinking-spinner--xs {
+  width: 12px;
+  height: 12px;
+  border-width: 1.5px;
+}
+
+.ai-thinking-spinner--sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.ai-thinking-spinner--md {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.ai-thinking-spinner__ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(99, 102, 241, 0.10);
+  animation: aiSpinnerPulse 1.7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.ai-thinking-bubble {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  border-bottom-right-radius: 4px;
+  background: linear-gradient(135deg, #eef2ff 0%, #e8ecff 100%);
+  border: 1px solid rgba(99, 102, 241, 0.14);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+}
+
+.ai-thinking-bubble__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* ── Input bar AI status indicator ──────────────────────────────── */
+@keyframes aiStatusBarPulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.ai-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  animation: aiStatusBarPulse 2s ease-in-out infinite;
+}
+
+.ai-status-bar__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+
+/* Toast slide-in animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ── Modern Chat UI Animations ──────────────────────────────────── */
+
+/* Contact list item stagger entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chat bubble slide-in from right (outgoing) */
+@keyframes messageSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Chat bubble slide-in from left (incoming) */
+@keyframes messageSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Unread pulse glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0);
+  }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Fade in for chat panel switch */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Central Info Premium Animations ────────────────────────────── */
+
+/* Header/stats slide down */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content slide up */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating empty state icon */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ── Utility Classes ────────────────────────────────────────────── */
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin modern scrollbar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 99px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* ── Modal & Form Premium Animations ────────────────────────── */
+
+@keyframes modalBackdropIn {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to   { opacity: 1; backdrop-filter: blur(8px); }
+}
+
+@keyframes modalCardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+}
+
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tabSlideIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes btnPulseGlow {
+  0%, 100% { box-shadow: 0 4px 15px -3px rgba(99,102,241,0.4), 0 2px 6px -2px rgba(99,102,241,0.2); }
+  50%      { box-shadow: 0 8px 25px -3px rgba(99,102,241,0.5), 0 4px 10px -2px rgba(99,102,241,0.3); }
+}
+
+@keyframes focusRingExpand {
+  from { box-shadow: 0 0 0 0 rgba(99,102,241,0.25); }
+  to   { box-shadow: 0 0 0 4px rgba(99,102,241,0.1); }
+}
+
+@keyframes badgePopIn {
+  0%  { opacity: 0; transform: scale(0.7); }
+  70% { transform: scale(1.08); }
+  100%{ opacity: 1; transform: scale(1); }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spinRing {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Utility classes */
+.animate-modal-backdrop { animation: modalBackdropIn 0.3s ease-out forwards; }
+.animate-modal-card     { animation: modalCardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+.animate-content-reveal   { animation: contentReveal 0.35s ease-out forwards; opacity: 0; }
+.animate-content-reveal-1 { animation-delay: 0.05s; }
+.animate-content-reveal-2 { animation-delay: 0.1s; }
+.animate-content-reveal-3 { animation-delay: 0.15s; }
+.animate-content-reveal-4 { animation-delay: 0.2s; }
+.animate-content-reveal-5 { animation-delay: 0.25s; }
+
+.animate-btn-glow:hover { animation: btnPulseGlow 1.5s ease-in-out infinite; }
+
+.animate-focus-ring:focus-within { animation: focusRingExpand 0.25s ease-out forwards; }
+
+.animate-badge-pop { animation: badgePopIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+.animate-gradient-shift { background-size: 200% 200%; animation: gradientShift 4s ease infinite; }
+
+.modal-close-btn:hover svg {
+  transform: rotate(90deg);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+.tab-btn-modern {
+  position: relative;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+.tab-btn-modern::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  right: 50%;
+  height: 2.5px;
+  background: linear-gradient(90deg, #6366f1, #818cf8);
+  border-radius: 2px;
+  transition: left 0.3s cubic-bezier(0.16,1,0.3,1), right 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.tab-btn-modern.active::after {
+  left: 8px;
+  right: 8px;
+}
+
+.input-modern {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.input-modern:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.08), 0 1px 2px rgba(99,102,241,0.05);
+  background-color: #fafafe;
+}
+
+.textarea-modern {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.textarea-modern:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.08), 0 1px 2px rgba(99,102,241,0.05);
+  background-color: #fafafe;
+}
+
+.btn-save-modern {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 50%, #6366f1 100%);
+  background-size: 200% 200%;
+  transition: background-position 0.4s ease, transform 0.15s ease, box-shadow 0.3s ease;
+}
+.btn-save-modern:hover {
+  background-position: 100% 100%;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -5px rgba(99,102,241,0.45), 0 4px 10px -3px rgba(99,102,241,0.25);
+}
+.btn-save-modern:active { transform: translateY(0px) scale(0.98); }
+.btn-save-modern:disabled { background: #c7d2fe; box-shadow: none; transform: none; }
+
+/* ── Inventory Page Premium Animations ────────────────────────────── */
+
+@keyframes inventoryFadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes inventoryCardEntrance {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes inventoryHeaderReveal {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes inventoryPillGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.15); }
+  50%      { box-shadow: 0 0 0 6px rgba(99,102,241,0); }
+}
+
+@keyframes inventoryShimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes inventoryFabPulse {
+  0%, 100% { box-shadow: 0 4px 14px -2px rgba(99,102,241,0.35); }
+  50%      { box-shadow: 0 8px 24px -2px rgba(99,102,241,0.5); }
+}
+
+@keyframes inventoryEmptyFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-6px) rotate(-2deg); }
+  75%      { transform: translateY(-3px) rotate(2deg); }
+}
+
+@keyframes inventoryStatusPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+
+.animate-inventory-header   { animation: inventoryHeaderReveal 0.4s ease-out forwards; }
+.animate-inventory-subtitle  { animation: inventoryHeaderReveal 0.4s ease-out 0.08s forwards; opacity: 0; }
+.animate-inventory-tabpill   { animation: inventoryFadeSlideUp 0.4s ease-out 0.12s forwards; opacity: 0; }
+.animate-inventory-card      { animation: inventoryCardEntrance 0.4s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
+.animate-inventory-card-1    { animation-delay: 0.06s; }
+.animate-inventory-card-2    { animation-delay: 0.12s; }
+.animate-inventory-card-3    { animation-delay: 0.18s; }
+.animate-inventory-card-4    { animation-delay: 0.24s; }
+.animate-inventory-card-5    { animation-delay: 0.30s; }
+
+.inventory-fab {
+  animation: inventoryFabPulse 3s ease-in-out infinite;
+  transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+.inventory-fab:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px -4px rgba(99,102,241,0.45);
+  animation: none;
+}
+.inventory-fab:active { transform: translateY(0) scale(0.98); }
+.inventory-fab:hover .inventory-fab-icon { transform: rotate(90deg); }
+.inventory-fab-icon { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+
+.inventory-row {
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.inventory-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -6px rgba(15,23,42,0.08), 0 2px 8px -2px rgba(15,23,42,0.04);
+}
+
+.inventory-action-btn {
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+.inventory-action-btn:hover { transform: scale(1.1); }
+.inventory-action-btn:active { transform: scale(0.95); }
+
+.inventory-skeleton {
+  background: linear-gradient(90deg, #f1f3f9 25%, #e8ebf2 50%, #f1f3f9 75%);
+  background-size: 800px 100%;
+  animation: inventoryShimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.inventory-empty-icon {
+  animation: inventoryEmptyFloat 4s ease-in-out infinite;
+}
+
+.inventory-status-dot {
+  animation: inventoryStatusPulse 2s ease-in-out infinite;
+}
+
+/* ── Mobile Responsive Utilities ────────────────────────────── */
+
+/* Safe area support for modern mobile browsers */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Touch-friendly tap targets — minimum 44px on mobile */
+@media (max-width: 640px) {
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Bottom sheet slide-up animation (for mobile modals) */
+@keyframes bottomSheetSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bottomSheetBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-bottom-sheet {
+  animation: bottomSheetSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-bottom-sheet-backdrop {
+  animation: bottomSheetBackdrop 0.2s ease-out forwards;
+}
+
+/* Mobile modal — full screen on small devices */
+@media (max-width: 640px) {
+  .modal-mobile-fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Responsive container with bottom nav padding */
+.mobile-content-container {
+  padding-bottom: 72px;
+}
+
+@media (min-width: 1024px) {
+  .mobile-content-container {
+    padding-bottom: 0;
+  }
+}
+
+/* Mobile card stack — force single column on small screens */
+@media (max-width: 480px) {
+  .stat-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Smooth scroll behavior for mobile horizontal lists */
+.smooth-scroll-x {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.smooth-scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile-friendly tab pills — horizontal scroll */
+.mobile-tab-scroll {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 6px;
+  padding: 2px;
+}
+.mobile-tab-scroll::-webkit-scrollbar {
+  display: none;
+}
+.mobile-tab-scroll > * {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* Prevent text selection on interactive mobile elements */
+.mobile-no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* Mobile bottom nav active indicator bounce */
+@keyframes navBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.05); }
+}
+
+.nav-icon-active {
+  animation: navBounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Responsive font sizing */
+@media (max-width: 380px) {
+  html {
+    font-size: 11.5px;
+  }
+}
+
+/* Mobile table → card conversion helper */
+@media (max-width: 640px) {
+  .table-mobile-cards thead {
+    display: none;
+  }
+  .table-mobile-cards tbody tr {
+    display: block;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--color-border-base);
+    border-radius: 12px;
+  }
+  .table-mobile-cards td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border: none;
+  }
+  .table-mobile-cards td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ── Mobile Bottom Nav: Prevent keyboard push ────────────────── */
+/* On mobile, when the virtual keyboard opens, fixed bottom elements
+   can get pushed up. We use position:fixed + bottom:0 and ensure
+   the nav never moves by pinning it with transform. */
+.mobile-bottom-nav {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  /* Prevent any transform from parent or keyboard resize */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* When keyboard is visible (visualViewport < window.innerHeight),
+   keep the bottom nav pinned. This JS-free approach uses the
+   @media (height) query to detect keyboard presence. */
+@media (max-height: 500px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ── Mobile Chat Mode: Hide header + bottom nav in chat room ── */
+/* LeadsPanel toggles `mobile-chat-active` class on document body.
+   When active on mobile: header hides, bottom nav hides, chat fills screen. */
+@media (max-width: 1023px) {
+  /* Hide top header */
+  body.mobile-chat-active header {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.15s ease;
+  }
+  /* Hide bottom navigation bar */
+  body.mobile-chat-active .mobile-bottom-nav {
+    display: none !important;
+  }
+  /* Remove header offset from content area */
+  body.mobile-chat-active .chat-header-offset {
+    padding-top: 0 !important;
+  }
+  /* Fill entire visible screen (no header, no bottom nav) — dvh for accuracy */
+  body.mobile-chat-active .leads-inbox-container {
+    height: 100dvh !important;
+    overflow: hidden !important;
+  }
+  /* Remove main content bottom padding in chat mode */
+  body.mobile-chat-active main {
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+  }
+  /* Remove bottom padding on input bar — input sits flush above keyboard */
+  body.mobile-chat-active .chat-bottom-bar {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* ── Mobile chat input field styling ──────────────────────────── */
+/* Make the input field more visible and properly sized on mobile */
+@media (max-width: 1023px) {
+  .chat-bottom-bar .chat-input-wrapper {
+    border-radius: 24px;
+    border-width: 1.5px;
+    padding: 10px 14px;
+    background: white;
+  }
+  .chat-bottom-bar .chat-input-field {
+    font-size: 15px;
+    line-height: 1.4;
+    min-height: 22px;
+  }
+  .chat-bottom-bar .chat-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+}

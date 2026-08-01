@@ -1,0 +1,50 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@ffmpeg/core": "^0.12.6",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@tailwindcss/vite": "^4.2.4",
+    "axios": "^1.15.2",
+    "cropperjs": "^1.6.2",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^1.9.0",
+    "mammoth": "^1.12.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.5",
+    "react-color": "^2.19.3",
+    "react-cropper": "^2.3.3",
+    "react-dom": "^19.2.5",
+    "react-rnd": "^10.5.3",
+    "react-router-dom": "^7.14.2",
+    "recharts": "^2.15.0",
+    "tailwindcss": "^4.2.4",
+    "three": "^0.184.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "vite": "^8.0.10"
+  }
+}

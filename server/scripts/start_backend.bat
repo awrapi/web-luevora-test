@@ -1,0 +1,6 @@
+@echo off
+echo Mengaktifkan Backend Luevora...
+cd /d "%~dp0.."
+call npm run dev
+pause
+

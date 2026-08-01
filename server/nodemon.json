@@ -1,0 +1,11 @@
+{
+  "ignore": [
+    "uploads/*",
+    "pdfs/*",
+    "node_modules/*",
+    ".git/*",
+    "*.test.js",
+    "*.log"
+  ],
+  "ext": "js,json"
+}

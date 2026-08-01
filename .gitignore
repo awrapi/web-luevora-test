@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+dashboard/node_modules/
+server/node_modules/
+database/node_modules/
+
+# Build outputs & environments
+dist/
+dashboard/dist/
+build/
+.env
+.env.local
+dashboard/.env
+server/.env
+*.log
+*.pid
+
+# Scratch and temporary root files (kept locally, not pushed to GitHub)
+simulation*.html
+LUEVORA_UI_UX_MARKETING_UPGRADE.txt
+migration_summary.md
+split_modals.cjs
+update_travel_bookings.cjs
+.agents/
+skills-lock.json
+luevoracrew-2-staging/
+
+# Backend scratch & test scripts (kept locally)
+server/_check_ig.js
+server/_test_tunnel.cjs
+server/checkReqs.js
+server/check_api.js
+server/check_data.js
+server/check_db.js
+server/clean_cm.js
+server/clean_data.js
+server/clean_db.js
+server/clean_guider.cjs
+server/clean_packages.js
+server/clear-data.js
+server/clear_chat*.js
+server/clear_data.*
+server/clear_sarah.js
+server/find_rizky.js
+server/find_tenant.js
+server/fix_credits.js
+server/force_delete.cjs
+server/install_deps.bat
+server/list_tenants.js
+server/push_db.js
+server/test-dashboard.js
+server/test-zernio-sdk.js
+server/test_rag_filter.js
+
+# Database batch scripts (kept locally)
+database/check_db.js
+database/clean_data.bat
+database/clean_database.bat
+database/deploy_db.bat
+database/prisma_db_push.bat
+
+# System / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
