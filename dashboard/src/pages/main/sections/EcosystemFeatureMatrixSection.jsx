@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Feature3DPreview from './Feature3DPreview';
 
 const EcosystemFeatureMatrixSection = () => {
   const [selectedFeature, setSelectedFeature] = useState(null);
@@ -28,20 +27,18 @@ const EcosystemFeatureMatrixSection = () => {
   ];
 
   const renderCardPreview = (f) => {
-    if (!f.image) {
-      return null;
-    }
+    if (!f.image) return null;
     return (
       <div style={{ height: 160, background: '#f8fafc', borderBottom: '1px solid #e2e8f0', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: 10, right: 12, fontSize: 13, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", color: '#475569', zIndex: 2, background: 'rgba(255,255,255,0.85)', padding: '2px 8px', borderRadius: 6, boxShadow: '0 1px 3px rgba(0,0,0,0.08)', backdropFilter: 'blur(4px)' }}>
+        <div style={{ position: 'absolute', top: 10, right: 12, fontSize: 13, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", color: '#0f172a', zIndex: 2, background: 'rgba(255,255,255,0.92)', padding: '2px 8px', borderRadius: 6, boxShadow: '0 2px 4px rgba(0,0,0,0.1)', backdropFilter: 'blur(6px)' }}>
           {String(f.id).padStart(2, '0')}
         </div>
-        <img src={f.image} alt={f.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={f.image} alt={f.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
     );
   };
 
-  // Split into two rows for marquee (interleave)
+  // Split into two rows for marquee
   const row1 = features.filter((_, i) => i % 2 === 0);
   const row2 = features.filter((_, i) => i % 2 === 1);
 
@@ -63,12 +60,10 @@ const EcosystemFeatureMatrixSection = () => {
       lastTime = time;
       const step = SPEED * (dt / 16.67);
 
-      // Row 1: scroll LEFT - content slides left
       pos1 += step;
       if (pos1 >= halfW1) pos1 -= halfW1;
       el1.style.transform = `translate3d(${-pos1}px, 0, 0)`;
 
-      // Row 2: scroll RIGHT - content slides right
       pos2 += step;
       if (pos2 >= halfW2) pos2 -= halfW2;
       el2.style.transform = `translate3d(${-halfW2 + pos2}px, 0, 0)`;
@@ -82,10 +77,6 @@ const EcosystemFeatureMatrixSection = () => {
   return (
     <>
       <style>{`
-        @keyframes marqueeFadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
         @keyframes modalCardIn {
           from { opacity: 0; transform: translateY(24px) scale(0.96); }
           to { opacity: 1; transform: translateY(0) scale(1); }
@@ -101,18 +92,25 @@ const EcosystemFeatureMatrixSection = () => {
         }
         .marquee-card {
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+          touch-action: pan-y;
         }
         .marquee-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 28px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
-          border-color: #c7d2fe !important;
+          box-shadow: 0 16px 32px rgba(99,102,241,0.12), 0 4px 12px rgba(0,0,0,0.05);
+          border-color: #a5b4fc !important;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
           .marquee-row--mobile-hide { display: none !important; }
+          .marquee-card { width: 220px !important; min-height: 300px !important; }
+          .feature-modal-card {
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            max-height: 92vh !important;
+          }
         }
       `}</style>
 
-      <section id="features" style={{
+      <section id="features" aria-label="Ecosystem Features" style={{
         position: 'relative', width: '100%',
         padding: '100px 0 96px', backgroundColor: '#ffffff',
         overflow: 'hidden', borderBottom: '1px solid #e5e7eb',
@@ -122,7 +120,7 @@ const EcosystemFeatureMatrixSection = () => {
           <h2 style={{ fontSize: 'clamp(28px, 3.8vw, 48px)', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1.15, margin: '0 0 14px', fontFamily: "'Satoshi', sans-serif" }}>
             One Employee.<br />Hundreds of Capabilities.
           </h2>
-          <p style={{ fontSize: 'clamp(14px, 1.05vw, 16px)', color: '#64748b', lineHeight: 1.6, margin: '0 auto', maxWidth: 520, fontFamily: "'Satoshi', sans-serif" }}>
+          <p style={{ fontSize: 'clamp(14px, 1.05vw, 16px)', color: '#475569', lineHeight: 1.6, margin: '0 auto', maxWidth: 520, fontFamily: "'Satoshi', sans-serif" }}>
             17 core features. Infinite possibilities. Scroll, explore, discover what Luevora can do for your business.
           </p>
         </div>
@@ -138,17 +136,16 @@ const EcosystemFeatureMatrixSection = () => {
                 display: 'flex', flexDirection: 'column',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               }}>
-                {/* Preview Area (UPGRADED UI GRAPHIC ONLY) */}
                 {renderCardPreview(f)}
 
                 <div style={{ padding: '20px 18px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6366f1', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{f.category}</div>
+                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4f46e5', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{f.category}</div>
                     <h3 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', lineHeight: 1.3, fontFamily: "'Satoshi', sans-serif" }}>{f.title}</h3>
-                    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
+                    <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
                   </div>
-                  <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#6366f1', fontFamily: "'Satoshi', sans-serif" }}>
-                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 800, color: '#4f46e5', fontFamily: "'Satoshi', sans-serif" }}>
+                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </div>
                 </div>
               </div>
@@ -167,17 +164,16 @@ const EcosystemFeatureMatrixSection = () => {
                 display: 'flex', flexDirection: 'column',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               }}>
-                {/* Preview Area (UPGRADED UI GRAPHIC ONLY) */}
                 {renderCardPreview(f)}
 
                 <div style={{ padding: '20px 18px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6366f1', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{f.category}</div>
+                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4f46e5', marginBottom: 8, fontFamily: "'Satoshi', sans-serif" }}>{f.category}</div>
                     <h3 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', lineHeight: 1.3, fontFamily: "'Satoshi', sans-serif" }}>{f.title}</h3>
-                    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
+                    <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.5, margin: 0 }}>{f.desc.length > 80 ? f.desc.slice(0, 80) + '...' : f.desc}</p>
                   </div>
-                  <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#6366f1', fontFamily: "'Satoshi', sans-serif" }}>
-                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 800, color: '#4f46e5', fontFamily: "'Satoshi', sans-serif" }}>
+                    Show More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </div>
                 </div>
               </div>
@@ -188,46 +184,46 @@ const EcosystemFeatureMatrixSection = () => {
 
       {/* Feature Details Modal */}
       {selectedFeature && (
-        <div style={{
+        <div role="dialog" aria-modal="true" style={{
           position: 'fixed', inset: 0, zIndex: 9999,
           display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16,
         }}>
           <div onClick={() => setSelectedFeature(null)} style={{
-            position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.55)', backdropFilter: 'blur(6px)',
+            position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.65)', backdropFilter: 'blur(8px)',
             animation: 'modalBackdropIn 0.25s ease forwards',
           }} />
 
-            <div style={{
-              position: 'relative', zIndex: 1, width: '100%', maxWidth: 520,
-              maxHeight: '90vh', display: 'flex', flexDirection: 'column',
-              background: '#ffffff', borderRadius: 24, boxShadow: '0 25px 60px -15px rgba(0,0,0,0.25)',
-              border: '1px solid #e2e8f0', overflow: 'hidden',
-              animation: 'modalCardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            }}>
-              {selectedFeature.image && (
-                <div style={{ width: '100%', height: 200, background: '#f8fafc', borderBottom: '1px solid #e2e8f0', overflow: 'hidden', position: 'relative' }}>
-                  <img src={selectedFeature.image} alt={selectedFeature.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', top: 12, right: 12, background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(6px)', padding: '4px 10px', borderRadius: 8, fontSize: 12, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", color: '#475569', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
-                    FEATURE #{String(selectedFeature.id).padStart(2, '0')}
-                  </div>
+          <div className="feature-modal-card" style={{
+            position: 'relative', zIndex: 1, width: '100%', maxWidth: 520,
+            maxHeight: '90vh', display: 'flex', flexDirection: 'column',
+            background: '#ffffff', borderRadius: 24, boxShadow: '0 25px 60px -15px rgba(0,0,0,0.3)',
+            border: '1px solid #e2e8f0', overflow: 'hidden',
+            animation: 'modalCardIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          }}>
+            {selectedFeature.image && (
+              <div style={{ width: '100%', height: 220, background: '#f8fafc', borderBottom: '1px solid #e2e8f0', overflow: 'hidden', position: 'relative' }}>
+                <img src={selectedFeature.image} alt={selectedFeature.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', top: 12, right: 12, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(6px)', padding: '4px 10px', borderRadius: 8, fontSize: 12, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", color: '#0f172a', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+                  FEATURE #{String(selectedFeature.id).padStart(2, '0')}
                 </div>
-              )}
-              <div style={{ padding: '24px 28px 20px', borderBottom: '1px solid #e2e8f0', background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6366f1', background: '#e0e7ff', padding: '4px 12px', borderRadius: 999, fontFamily: "'Satoshi', sans-serif" }}>
-                    {selectedFeature.category}
-                  </span>
-                  <button onClick={() => setSelectedFeature(null)} style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', padding: 4, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  </button>
-                </div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', fontFamily: "'Satoshi', sans-serif", letterSpacing: '-0.02em' }}>
-                  {selectedFeature.title}
-                </h3>
-                <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: 0 }}>
-                  {selectedFeature.desc}
-                </p>
               </div>
+            )}
+            <div style={{ padding: '24px 28px 20px', borderBottom: '1px solid #e2e8f0', background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4f46e5', background: '#e0e7ff', padding: '4px 12px', borderRadius: 999, fontFamily: "'Satoshi', sans-serif" }}>
+                  {selectedFeature.category}
+                </span>
+                <button onClick={() => setSelectedFeature(null)} aria-label="Close modal" style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: '#64748b', padding: 4, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 8px', fontFamily: "'Satoshi', sans-serif", letterSpacing: '-0.02em' }}>
+                {selectedFeature.title}
+              </h3>
+              <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.6, margin: 0 }}>
+                {selectedFeature.desc}
+              </p>
+            </div>
 
             <div style={{ padding: '20px 24px', overflowY: 'auto', flex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -236,10 +232,10 @@ const EcosystemFeatureMatrixSection = () => {
                     display: 'flex', alignItems: 'center', gap: 12,
                     padding: '12px 16px', background: '#f8fafc',
                     borderRadius: 12, border: '1px solid #e2e8f0',
-                    fontSize: 14, color: '#334155', fontWeight: 500,
+                    fontSize: 14, color: '#1e293b', fontWeight: 600,
                     fontFamily: "'Satoshi', sans-serif",
                   }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="20 6 9 17 4 12"/></svg>
                     <span>{d}</span>
                   </div>
                 ))}
@@ -249,7 +245,7 @@ const EcosystemFeatureMatrixSection = () => {
             <div style={{ padding: '16px 28px 24px', display: 'flex', justifyContent: 'flex-end', gap: 12, borderTop: '1px solid #e2e8f0' }}>
               <button onClick={() => setSelectedFeature(null)} style={{
                 padding: '10px 22px', fontSize: 14, fontWeight: 700, borderRadius: 999,
-                background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#475569',
+                background: '#f1f5f9', border: '1px solid #cbd5e1', color: '#1e293b',
                 cursor: 'pointer', fontFamily: "'Satoshi', sans-serif",
               }}>
                 Close
