@@ -16,6 +16,7 @@ server/.env
 *.pid
 
 # Scratch and temporary root files (kept locally, not pushed to GitHub)
+scratch/
 simulation*.html
 !dashboard/public/simulation.html
 !dashboard/public/simulation2.html

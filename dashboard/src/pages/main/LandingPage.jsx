@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LazySection from './shared/LazySection';
 import LaptopMockup from './shared/LaptopMockup';
 import AgentTalkMockup from './shared/AgentTalkMockup';
+import WhatsAppWidget from './shared/WhatsAppWidget';
 import NewHeroSection from './sections/NewHeroSection';
 import CustomerJourneySection from './sections/CustomerJourneySection';
 import EcosystemFeatureMatrixSection from './sections/EcosystemFeatureMatrixSection';
@@ -10,7 +11,6 @@ import TransformationSection from './sections/TransformationSection';
 import ChatOpsSection from './sections/ChatOpsSection';
 import MultiPlatformSection from './sections/MultiPlatformSection';
 import DataMigrationSection from './sections/DataMigrationSection';
-import PricingSection from './sections/PricingSection';
 import FAQSection from './sections/FAQSection';
 import FinalCTASection from './sections/FinalCTASection';
 import FooterSection from './sections/FooterSection';
@@ -944,9 +944,6 @@ const LandingPage = () => {
       {/* ─── CTA DIVIDER ───────────────────────────── */}
       <div style={{ width: '100%', backgroundColor: '#ffffff', padding: '32px 20px', display: 'flex', justifyContent: 'center', borderTop: '1px solid #e5e7eb' }}><a href="/register" style={{ display: 'inline-flex', padding: '14px 32px', fontSize: 15, fontWeight: 700, borderRadius: 999, background: '#6366f1', color: '#fff', textDecoration: 'none', fontFamily: "'Satoshi', sans-serif" }}>Start Free Trial →</a></div>
 
-      {/* ─── PRICING SECTION ───────────────────────── */}
-      <LazySection><PricingSection /></LazySection>
-
       {/* ─── FAQ SECTION ───────────────────────────── */}
       <LazySection><FAQSection /></LazySection>
 
@@ -955,6 +952,9 @@ const LandingPage = () => {
 
       {/* ─── FOOTER SECTION ────────────────────────── */}
       <FooterSection />
+
+      {/* ─── FLOATING WHATSAPP CUSTOMER SERVICE ─────── */}
+      <WhatsAppWidget />
     </div>
   );
 };
