@@ -12,6 +12,15 @@ const NewHeroSection = () => {
   return (
     <>
       <style>{`
+        .lp-new-hero-section,
+        .lp-new-hero-section *,
+        .lp-new-hero-section h1,
+        .lp-new-hero-section p,
+        .lp-new-hero-section span,
+        .lp-new-hero-section button {
+          font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
         .solid-btn-primary {
           background: #000;
           color: #fff;
@@ -103,7 +112,7 @@ const NewHeroSection = () => {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', width: '100%' }}>
             <h1
               style={{
-                fontSize: 'clamp(32px, 5.2vw, 64px)',
+                fontSize: 'clamp(24px, 3.9vw, 48px)',
                 fontWeight: 800,
                 color: '#0f172a',
                 lineHeight: 1.1,
@@ -113,24 +122,38 @@ const NewHeroSection = () => {
                 fontFamily: "'Satoshi', sans-serif",
               }}
             >
-              Hire an AI Employee<br />
+              Hire an AI Virtual Team<br />
               That Runs Your Business.
             </h1>
 
-            <p
+            <div
               style={{
-                fontSize: 'clamp(14px, 1.25vw, 19px)',
-                color: '#475569',
-                lineHeight: 1.65,
+                backgroundColor: 'rgba(0, 0, 0, 0.55)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                padding: '14px 20px',
+                borderRadius: '16px',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
                 margin: '0 0 32px',
                 maxWidth: '560px',
-                textAlign: 'left',
-                fontWeight: 500,
-                fontFamily: "'Satoshi', sans-serif",
+                boxSizing: 'border-box',
               }}
             >
-              Customer support, sales, operations, and reporting, all handled by one AI Operational Employee that works 24/7, so your team can focus on growing the business.
-            </p>
+              <p
+                style={{
+                  fontSize: 'clamp(13.5px, 1.15vw, 16.5px)',
+                  color: '#ffffff',
+                  lineHeight: 1.65,
+                  margin: 0,
+                  textAlign: 'left',
+                  fontWeight: 500,
+                  fontFamily: "'Satoshi', sans-serif",
+                }}
+              >
+                Customer support, sales, operations, and reporting, all handled by an AI Operational Virtual Team that works 24/7, so your team can focus on growing the business.
+              </p>
+            </div>
 
             <div
               className="hero-cta-btn-wrap"
@@ -171,6 +194,38 @@ const NewHeroSection = () => {
           >
             <PhoneMockup />
           </div>
+        </div>
+
+        {/* Background Dashboard Mockup with Opacity & Gradient Mask */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '0px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '100%',
+            maxWidth: '1380px',
+            padding: '0 24px',
+            zIndex: 3,
+            pointerEvents: 'none',
+            opacity: 0.55,
+            display: 'flex',
+            justifyContent: 'center',
+            boxSizing: 'border-box',
+            WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 95%)',
+            maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 95%)',
+          }}
+        >
+          <img
+            src="/assets/landingpage/maindashboard.png"
+            alt="Luevora Main Dashboard Background"
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '24px',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+            }}
+          />
         </div>
       </section>
     </>

@@ -46,6 +46,20 @@ app.get('/test-rag', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'test-rag.html'));
 });
 
+// Serve sitemap.xml, sitemap.xsl and robots.txt
+app.get('/sitemap.xml', (req, res) => {
+  res.type('application/xml');
+  res.sendFile(path.join(__dirname, '../dashboard/public/sitemap.xml'));
+});
+app.get('/sitemap.xsl', (req, res) => {
+  res.type('application/xml');
+  res.sendFile(path.join(__dirname, '../dashboard/public/sitemap.xsl'));
+});
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.sendFile(path.join(__dirname, '../dashboard/public/robots.txt'));
+});
+
 app.post('/api/dev/test-chat', async (req, res) => {
   try {
     const { tenantId = 11, userPhone = '6283811221775', userMessage, chatType = 'sales' } = req.body;

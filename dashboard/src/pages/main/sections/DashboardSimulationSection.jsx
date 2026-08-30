@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+// Gambar dashboard ukuran 2270 x 1344
+const DASHBOARD_IMAGE_SRC = '/assets/landingpage/leadsinbox.png';
+
 const DashboardSimulationSection = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); obs.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          obs.disconnect();
+        }
+      },
       { threshold: 0.1 }
     );
     obs.observe(el);
@@ -21,9 +29,10 @@ const DashboardSimulationSection = () => {
       id="simulation"
       ref={sectionRef}
       style={{
+        position: 'relative',
         width: '100%',
         backgroundColor: '#ffffff',
-        padding: '80px 20px',
+        padding: '100px 24px 110px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -34,89 +43,93 @@ const DashboardSimulationSection = () => {
       }}
     >
       <style>{`
-        .lp-sim-container {
-          display: flex;
-          flex-direction: row;
-          gap: 40px;
+        #simulation,
+        #simulation *,
+        .lp-sim-image-container,
+        .lp-sim-image-wrap {
+          font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
+        .lp-sim-image-container {
           width: 100%;
-          max-width: 1300px;
-          align-items: flex-start;
+          max-width: 860px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
         }
-        .lp-sim-tabs {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          width: 220px;
-          flex-shrink: 0;
-          align-self: flex-start;
-        }
-        .lp-sim-tab-btn {
-          padding: 14px 20px;
-          border-radius: 12px;
-          font-size: 14px;
-          font-weight: 700;
-          cursor: pointer;
+        .lp-sim-image-wrap {
+          width: 100%;
+          padding: 20px;
+          border-radius: 24px;
+          background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 50%, #f1f5f9 100%);
           border: 1px solid #e2e8f0;
-          text-align: left;
+          box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(226, 232, 240, 0.8);
           display: flex;
           align-items: center;
-          gap: 12px;
-          transition: all 0.2s ease;
-          height: 48px !important;
-          max-height: 48px !important;
-          flex: 0 0 auto !important;
+          justifyContent: center;
+          position: relative;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
           box-sizing: border-box;
         }
-        .lp-sim-window-wrap {
-          flex: 1;
-          min-width: 0;
+        .lp-sim-image-wrap:hover {
+          box-shadow: 0 30px 70px -15px rgba(99, 102, 241, 0.14), 0 0 0 1px rgba(199, 210, 254, 0.9);
+          transform: translateY(-2px);
         }
-        @media (max-width: 900px) {
-          .lp-sim-container {
-            flex-direction: column;
-            gap: 24px;
-            align-items: stretch;
-          }
-          .lp-sim-tabs {
-            flex-direction: row;
-            flex-wrap: wrap;
-            width: 100%;
-            gap: 8px;
-            align-self: auto !important;
-          }
-          .lp-sim-tab-btn {
-            justify-content: center;
-            flex: 1 1 calc(50% - 4px) !important;
-            height: 44px !important;
-            max-height: 44px !important;
-            padding: 10px 14px;
-            font-size: 13px;
-            gap: 8px;
-          }
-          .lp-sim-tab-btn:last-child {
-            flex: 1 1 100% !important;
-          }
+        .lp-sim-img {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 2270 / 1344;
+          object-fit: cover;
+          display: block;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
         }
         @media (max-width: 640px) {
-          .lp-sim-iframe {
-            height: clamp(380px, 78vh, 600px) !important;
+          .lp-sim-image-wrap {
+            padding: 10px;
+            border-radius: 16px;
           }
-          .lp-sim-address-bar {
-            width: 85% !important;
-            font-size: 10px !important;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+          .lp-sim-img {
+            border-radius: 10px;
           }
         }
       `}</style>
 
+      {/* Decorative ambient background glows */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '15%',
+          left: '8%',
+          width: '450px',
+          height: '450px',
+          background: 'radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '12%',
+          right: '8%',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Header */}
       <div
         style={{
           maxWidth: '1200px',
           width: '100%',
           textAlign: 'center',
-          marginBottom: '40px',
+          marginBottom: '52px',
+          position: 'relative',
+          zIndex: 2,
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'none' : 'translateY(20px)',
           transition: 'opacity 0.8s ease, transform 0.8s ease',
@@ -137,7 +150,7 @@ const DashboardSimulationSection = () => {
         </span>
         <h2
           style={{
-            fontSize: 'clamp(28px, 3.2vw, 44px)',
+            fontSize: 'clamp(21px, 2.4vw, 33px)',
             fontWeight: 800,
             color: '#0f172a',
             margin: '0 0 16px',
@@ -150,7 +163,7 @@ const DashboardSimulationSection = () => {
         <p
           style={{
             fontSize: 'clamp(14px, 1.05vw, 16px)',
-            color: '#475569',
+            color: '#94a3b8',
             maxWidth: '750px',
             margin: '0 auto',
             lineHeight: 1.6,
@@ -160,156 +173,137 @@ const DashboardSimulationSection = () => {
         </p>
       </div>
 
-      <div className="lp-sim-container">
-        {/* Left Column: Tab switcher (stacked vertically) */}
-        <div
-          className="lp-sim-tabs"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'none' : 'translateY(20px)',
-            transition: 'opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s',
-            zIndex: 10,
-          }}
-        >
-          <button
-            className="lp-sim-tab-btn"
-            onClick={() => setActiveTab('overview')}
-            style={{
-              backgroundColor: activeTab === 'overview' ? '#6366f1' : '#f8fafc',
-              color: activeTab === 'overview' ? '#ffffff' : '#475569',
-              boxShadow: activeTab === 'overview' ? '0 4px 12px rgba(99,102,241,0.25)' : 'none',
-            }}
-          >
-            {/* Dashboard Icon */}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="7" height="9"/>
-              <rect x="14" y="3" width="7" height="5"/>
-              <rect x="14" y="12" width="7" height="9"/>
-              <rect x="3" y="16" width="7" height="5"/>
-            </svg>
-            Overview
-          </button>
-          <button
-            className="lp-sim-tab-btn"
-            onClick={() => setActiveTab('leads')}
-            style={{
-              backgroundColor: activeTab === 'leads' ? '#6366f1' : '#f8fafc',
-              color: activeTab === 'leads' ? '#ffffff' : '#475569',
-              boxShadow: activeTab === 'leads' ? '0 4px 12px rgba(99,102,241,0.25)' : 'none',
-            }}
-          >
-            {/* Inbox/Messages Icon */}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
-              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
-            </svg>
-            Leads Inbox
-          </button>
-          <button
-            className="lp-sim-tab-btn"
-            onClick={() => setActiveTab('human')}
-            style={{
-              backgroundColor: activeTab === 'human' ? '#6366f1' : '#f8fafc',
-              color: activeTab === 'human' ? '#ffffff' : '#475569',
-              boxShadow: activeTab === 'human' ? '0 4px 12px rgba(99,102,241,0.25)' : 'none',
-            }}
-          >
-            {/* Human/Routing Icon */}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-            Human Routing
-          </button>
-        </div>
-
-        {/* Right Column: Browser Window Wrapper */}
-        <div
-          className="lp-sim-window-wrap"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'none' : 'translateY(40px)',
-            transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s',
-          }}
-        >
-          <div
-            style={{
-              width: '100%',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.12)',
-              border: '1px solid #e2e8f0',
-              backgroundColor: '#f8fafc',
-            }}
-          >
-            {/* Browser Titlebar */}
+      {/* 2270 x 1344 Image Container / Placeholder */}
+      <div
+        className="lp-sim-image-container"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'none' : 'translateY(30px)',
+          transition: 'opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s',
+        }}
+      >
+        <div className="lp-sim-image-wrap">
+          {!imgError ? (
+            <img
+              src={DASHBOARD_IMAGE_SRC}
+              alt="Meet the AI That Runs Your Front Desk"
+              className="lp-sim-img"
+              onError={() => setImgError(true)}
+            />
+          ) : (
             <div
               style={{
-                height: '40px',
-                backgroundColor: '#edf2f7',
-                borderBottom: '1px solid #e2e8f0',
+                width: '100%',
+                height: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
-                padding: '0 16px',
-                position: 'relative',
+                justifyContent: 'center',
+                padding: '32px 20px',
+                textAlign: 'center',
+                background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 50%, #f1f5f9 100%)',
+                border: '2px dashed #cbd5e1',
+                borderRadius: '20px',
+                boxSizing: 'border-box',
               }}
             >
-              {/* Windows Dots */}
-              <div style={{ display: 'flex', gap: '8px', position: 'absolute', left: '16px' }}>
-                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
-              </div>
-
-              {/* Browser Address Bar */}
+              {/* Placeholder Icon */}
               <div
-                className="lp-sim-address-bar"
                 style={{
-                  margin: '0 auto',
-                  width: '60%',
-                  maxWidth: '400px',
-                  height: '24px',
-                  backgroundColor: '#ffffff',
-                  borderRadius: '6px',
-                  border: '1px solid #e2e8f0',
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: '16px',
+                  backgroundColor: '#eef2ff',
+                  border: '1px solid #c7d2fe',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '11px',
-                  color: '#718096',
+                  color: '#6366f1',
+                  marginBottom: '16px',
+                  boxShadow: '0 4px 12px rgba(99, 102, 241, 0.1)',
+                }}
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+
+              {/* Badges */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginBottom: '12px',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: '#6366f1',
+                    background: '#eef2ff',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    border: '1px solid #c7d2fe',
+                  }}
+                >
+                  2270 × 1344 px
+                </span>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#1e293b' }}>
+                  Front Desk AI Dashboard Image
+                </span>
+              </div>
+
+              <p
+                style={{
+                  fontSize: '14px',
+                  color: '#64748b',
+                  margin: '0 0 16px',
+                  maxWidth: '520px',
+                  lineHeight: 1.6,
+                }}
+              >
+                Simpan file gambar dengan ukuran <strong>2270 × 1344</strong> di{' '}
+                <code
+                  style={{
+                    backgroundColor: '#e2e8f0',
+                    padding: '3px 8px',
+                    borderRadius: '6px',
+                    color: '#0f172a',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                  }}
+                >
+                  public/assets/dashboard-preview.png
+                </code>{' '}
+                untuk menampilkannya di sini.
+              </p>
+
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '12px',
+                  color: '#94a3b8',
                   fontWeight: 500,
                 }}
               >
-                {activeTab === 'overview' 
-                  ? 'luevora-dashboard-simulator.local/overview' 
-                  : activeTab === 'leads'
-                    ? 'luevora-dashboard-simulator.local/leads'
-                    : 'luevora-dashboard-simulator.local/human-routing'}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                Aspect Ratio 2270 : 1344 (~1.69 : 1)
               </div>
             </div>
-
-            {/* Browser Iframe content */}
-            <iframe
-              className="lp-sim-iframe"
-              src={
-                activeTab === 'overview' 
-                  ? '/simulation.html' 
-                  : activeTab === 'leads' 
-                    ? '/simulation2.html' 
-                    : '/simulation3.html'
-              }
-              title="Luevora Dashboard Simulator"
-              style={{
-                width: '100%',
-                height: '700px',
-                border: 'none',
-                display: 'block',
-                backgroundColor: '#ffffff',
-              }}
-            />
-          </div>
+          )}
         </div>
       </div>
     </section>

@@ -207,13 +207,14 @@ const TransformationSection = () => {
               <div style={{
                 padding: '22px 26px 18px',
                 borderBottom: '1px solid #fee2e2',
-                backgroundColor: '#fff8f8',
+                backgroundColor: '#fef2f2',
               }}>
                 <div style={{
                   display: 'inline-block', fontSize: '10px', fontWeight: 700,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: '#dc2626', backgroundColor: '#fee2e2',
-                  padding: '3px 10px', borderRadius: '4px', marginBottom: '10px',
+                  color: '#dc2626', backgroundColor: 'transparent',
+                  padding: '3px 0', borderRadius: '4px', marginBottom: '10px',
+                  fontFamily: "'Satoshi', sans-serif",
                 }}>Before</div>
                 <h3 style={{
                   fontSize: '18px', fontWeight: 700, color: '#111827',
@@ -280,7 +281,7 @@ const TransformationSection = () => {
               <div style={{
                 padding: '14px 26px',
                 borderTop: '1px solid #fee2e2',
-                backgroundColor: '#fff8f8',
+                backgroundColor: '#fef2f2',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
                 <span style={{ fontSize: '12px', color: '#9ca3af' }}>Daily chat capacity</span>
@@ -326,13 +327,14 @@ const TransformationSection = () => {
               <div style={{
                 padding: '22px 26px 18px',
                 borderBottom: '1px solid #e0e7ff',
-                backgroundColor: '#f8f7ff',
+                backgroundColor: '#eef2ff',
               }}>
                 <div style={{
                   display: 'inline-block', fontSize: '10px', fontWeight: 700,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: '#4f46e5', backgroundColor: '#e0e7ff',
-                  padding: '3px 10px', borderRadius: '4px', marginBottom: '10px',
+                  color: '#4f46e5', backgroundColor: 'transparent',
+                  padding: '3px 0', borderRadius: '4px', marginBottom: '10px',
+                  fontFamily: "'Satoshi', sans-serif",
                 }}>With Luevora</div>
                 <h3 style={{
                   fontSize: '18px', fontWeight: 700, color: '#111827',
@@ -420,7 +422,7 @@ const TransformationSection = () => {
               <div style={{
                 padding: '14px 26px',
                 borderTop: '1px solid #e0e7ff',
-                backgroundColor: '#f8f7ff',
+                backgroundColor: '#eef2ff',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
                 <span style={{ fontSize: '12px', color: '#6b7280' }}>Daily chat capacity</span>
@@ -452,7 +454,7 @@ const TransformationSection = () => {
               }}
             >
               <div style={{
-                fontSize: 'clamp(22px, 2.5vw, 36px)', fontWeight: 800,
+                fontSize: 'clamp(11px, 1.25vw, 18px)', fontWeight: 800,
                 color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '8px',
               }}>{m.value}</div>
               <div style={{

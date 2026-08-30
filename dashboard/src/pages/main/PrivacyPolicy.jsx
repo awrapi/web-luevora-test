@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', 'Inter', 'Segoe UI', sans-serif" }}>
+    <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', sans-serif" }}>
       {/* Header */}
       <header style={{ padding: '20px 40px', borderBottom: '1px solid #eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

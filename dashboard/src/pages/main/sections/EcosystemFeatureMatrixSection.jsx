@@ -118,7 +118,7 @@ const EcosystemFeatureMatrixSection = () => {
         {/* Header */}
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 24px', marginBottom: 56 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3.8vw, 48px)', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1.15, margin: '0 0 14px', fontFamily: "'Satoshi', sans-serif" }}>
-            One Employee.<br />Hundreds of Capabilities.
+            Virtual Team.<br />Hundreds of Capabilities.
           </h2>
           <p style={{ fontSize: 'clamp(14px, 1.05vw, 16px)', color: '#475569', lineHeight: 1.6, margin: '0 auto', maxWidth: 520, fontFamily: "'Satoshi', sans-serif" }}>
             17 core features. Infinite possibilities. Scroll, explore, discover what Luevora can do for your business.

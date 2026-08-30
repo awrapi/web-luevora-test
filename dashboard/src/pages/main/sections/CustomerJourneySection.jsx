@@ -132,35 +132,6 @@ const CustomerJourneySection = () => {
       >
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 72px' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              backgroundColor: '#eef2ff',
-              border: '1px solid #c7d2fe',
-              padding: '6px 16px',
-              borderRadius: '999px',
-              fontSize: '12px',
-              fontWeight: 700,
-              color: '#4f46e5',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              marginBottom: '20px',
-              fontFamily: "'Satoshi', sans-serif",
-            }}
-          >
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: '#4f46e5',
-                boxShadow: '0 0 8px #4f46e5',
-              }}
-            />
-            Enterprise Automation Engine
-          </div>
 
           <h2
             style={{

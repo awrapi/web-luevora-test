@@ -43,7 +43,7 @@ const FoundingAccess = () => {
 
   if (status === 'success') {
     return (
-      <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', 'Inter', 'Segoe UI', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', maxWidth: '500px', padding: '40px' }}>
           <div style={{ width: '80px', height: '80px', background: '#e0e7ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
             <span style={{ fontSize: '40px' }}>🎉</span>
@@ -57,7 +57,7 @@ const FoundingAccess = () => {
   }
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', 'Inter', 'Segoe UI', sans-serif" }}>
+    <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#111', fontFamily: "'Satoshi', sans-serif" }}>
       {/* Header */}
       <header style={{ padding: '20px 40px', borderBottom: '1px solid #eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

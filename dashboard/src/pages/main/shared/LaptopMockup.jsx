@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useThrottledMouseMove from './useThrottledMouseMove';
 
 const LaptopMockup = () => {
@@ -163,8 +163,8 @@ const LaptopMockup = () => {
             }}
           >
             <img
-              src="/assets/laptop.png"
-              alt="Luevora on Laptop"
+              src="/assets/landingpage/maindashboard.png"
+              alt="Luevora Dashboard"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}
               loading="lazy"
@@ -173,7 +173,7 @@ const LaptopMockup = () => {
                 height: 'auto',
                 objectFit: 'contain',
                 display: 'block',
-                /* Float animation only when NOT hovered */
+                borderRadius: '16px',
                 animation: isHovered ? 'none' : 'laptop-float 6s ease-in-out infinite',
               }}
             />

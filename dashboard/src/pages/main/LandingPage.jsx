@@ -4,13 +4,12 @@ import LaptopMockup from './shared/LaptopMockup';
 import AgentTalkMockup from './shared/AgentTalkMockup';
 import WhatsAppWidget from './shared/WhatsAppWidget';
 import NewHeroSection from './sections/NewHeroSection';
-import CustomerJourneySection from './sections/CustomerJourneySection';
 import EcosystemFeatureMatrixSection from './sections/EcosystemFeatureMatrixSection';
 import DashboardSimulationSection from './sections/DashboardSimulationSection';
+import MarketingSpaceSection from './sections/MarketingSpaceSection';
+import MarketingResearchSection from './sections/MarketingResearchSection';
+import FeatureCarouselSection from './sections/FeatureCarouselSection';
 import TransformationSection from './sections/TransformationSection';
-import ChatOpsSection from './sections/ChatOpsSection';
-import MultiPlatformSection from './sections/MultiPlatformSection';
-import DataMigrationSection from './sections/DataMigrationSection';
 import FAQSection from './sections/FAQSection';
 import FinalCTASection from './sections/FinalCTASection';
 import FooterSection from './sections/FooterSection';
@@ -190,7 +189,7 @@ const LandingPage = () => {
         overflowY: 'auto',
         overflowX: 'hidden',
         backgroundColor: '#ffffff',
-        fontFamily: "'Satoshi', 'Inter', 'Segoe UI', sans-serif",
+        fontFamily: "'Satoshi', sans-serif",
         color: '#111111',
         position: 'relative',
       }}
@@ -591,12 +590,8 @@ const LandingPage = () => {
       {/* ─── NEW HERO SECTION ───────────────────────────────── */}
       <NewHeroSection />
 
-
-      {/* ─── CUSTOMER JOURNEY SECTION ─────────────────────── */}
-      <CustomerJourneySection />
-
-      {/* ─── ECOSYSTEM FEATURE MATRIX SECTION ─────────────── */}
-      <EcosystemFeatureMatrixSection />
+      {/* ─── DASHBOARD SIMULATION SECTION ───────────── */}
+      <LazySection><DashboardSimulationSection /></LazySection>
 
       {/* ─── FIXED HEADER BAR (logo kiri + nav kanan, ikut scroll) ─────── */}
       <div
@@ -781,11 +776,11 @@ const LandingPage = () => {
                 margin: '0 0 14px',
 }}>WHO IS LUEVORA</p>
               <h2 style={{
-                fontSize: 'clamp(26px, 2.8vw, 40px)',
+                fontSize: 'clamp(20px, 2.1vw, 30px)',
                 fontWeight: 800, color: '#0f172a',
                 margin: 0, lineHeight: 1.2, letterSpacing: '-0.025em',
               }}>
-                Not a Chatbot.<br />Your New Employee.
+                Not a Chatbot.<br />Your New Virtual Team.
               </h2>
             </div>
 
@@ -793,7 +788,7 @@ const LandingPage = () => {
               fontSize: 'clamp(14px, 1.05vw, 16px)',
               color: '#475569', lineHeight: 1.8, margin: 0,
             }}>
-              Luevora isn't your average chatbot that just says &ldquo;Hello, how can I help?&rdquo; it is an AI employee that remembers every customer, actively manages operations, and reports to you when decisions matter. You focus on growth. Luevora executes.
+              Luevora isn't your average chatbot that just says &ldquo;Hello, how can I help?&rdquo; it is an AI virtual team that remembers every customer, actively manages operations, and reports to you when decisions matter. You focus on growth. Luevora executes.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -863,86 +858,26 @@ const LandingPage = () => {
       </section>
       </LazySection>
 
-      {/* ─── CTA DIVIDER ───────────────────────────── */}
-      <div style={{ width: '100%', backgroundColor: '#ffffff', padding: '32px 20px', display: 'flex', justifyContent: 'center', borderTop: '1px solid #e5e7eb' }}><a href="/register" style={{ display: 'inline-flex', padding: '14px 32px', fontSize: 15, fontWeight: 700, borderRadius: 999, background: '#6366f1', color: '#fff', textDecoration: 'none', fontFamily: "'Satoshi', sans-serif" }}>Start Free Trial →</a></div>
 
-      {/* ─── DASHBOARD SIMULATION SECTION ───────────── */}
-      <LazySection><DashboardSimulationSection /></LazySection>
 
-      {/* ─── Agent Talk Session SECTION ─────────────────────── */}
-      <LazySection assets={['/assets/agent-talk.png']}>
-        <section
-          style={{
-            position: 'relative',
-            width: '100%',
-            backgroundColor: '#ffffff',
-            borderBottom: '1px solid #e5e7eb',
-            overflow: 'hidden',
-            padding: '72px 0',
-          }}
-        >
-          <div
-            className="lp-agent-grid"
-            style={{
-              position: 'relative', zIndex: 1,
-              maxWidth: '1200px',
-              margin: '0 auto',
-              padding: '0 40px',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              alignItems: 'center',
-              gap: '72px',
-            }}
-          >
-            {/* LEFT: Text */}
-            <div className="lp-agent-text" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <p style={{
-                fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
-                textTransform: 'uppercase', color: '#6366f1', margin: 0,
-              }}>Agent Talk Session</p>
-              <h2 style={{
-                fontSize: 'clamp(26px, 2.8vw, 40px)', fontWeight: 800,
-                color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.025em',
-              }}>
-                A 15 Minute Interview.<br />Then Your AI Is Ready.
-              </h2>
-              <p style={{
-                fontSize: 'clamp(14px, 1.05vw, 16px)', color: '#475569',
-                lineHeight: 1.8, margin: 0, maxWidth: '500px',
-              }}>
-                Forget tedious manual data entry. With the AI Agent Talk Session, onboarding
-                your new AI is as simple as a conversation. Our system interviews you like
-                a new employee onboarding, where you answer questions about your operational hours,
-                SOPs, and business rules via text, voice, or by uploading documents.
-                Once the session is complete, your entire Knowledge Base is automatically
-                populated and your AI is instantly ready to serve customers.
-              </p>
-            </div>
+      {/* ─── MARKETING SPACE SECTION ─────────────────────── */}
+      <LazySection><MarketingSpaceSection /></LazySection>
 
-            {/* RIGHT: Illustration */}
-            <AgentTalkMockup />
-          </div>
-        </section>
+      {/* ─── MARKETING RESEARCH SECTION ──────────────── */}
+      <LazySection><MarketingResearchSection /></LazySection>
+
+      {/* ─── ECOSYSTEM FEATURE MATRIX SECTION ─────────────── */}
+      <EcosystemFeatureMatrixSection />
+
+      {/* ─── CORE FEATURES CAROUSEL SECTION ──────────────── */}
+      <LazySection>
+        <FeatureCarouselSection />
       </LazySection>
-
-      {/* ─── CTA DIVIDER ───────────────────────────── */}
-      <div style={{ width: '100%', backgroundColor: '#ffffff', padding: '32px 20px', display: 'flex', justifyContent: 'center', borderTop: '1px solid #e5e7eb' }}><a href="/register" style={{ display: 'inline-flex', padding: '14px 32px', fontSize: 15, fontWeight: 700, borderRadius: 999, background: '#6366f1', color: '#fff', textDecoration: 'none', fontFamily: "'Satoshi', sans-serif" }}>Start Free Trial →</a></div>
-
-      {/* ─── CHATOPS ASSISTANT SECTION ───────────────────────── */}
-      <LazySection assets={['/assets/chatops-phone.png']}><ChatOpsSection /></LazySection>
-
-
-      {/* ─── MULTI-PLATFORM AGENT SECTION ───────────────── */}
-      <LazySection assets={['/assets/multiplatform.png']}><MultiPlatformSection /></LazySection>
-
-      {/* ─── DATA MIGRATION SECTION ────────────────────── */}
-      <LazySection assets={['/assets/data-migration.png']}><DataMigrationSection /></LazySection>
 
       {/* ─── TRANSFORMATION SECTION ──────────────────── */}
       <LazySection><TransformationSection /></LazySection>
 
-      {/* ─── CTA DIVIDER ───────────────────────────── */}
-      <div style={{ width: '100%', backgroundColor: '#ffffff', padding: '32px 20px', display: 'flex', justifyContent: 'center', borderTop: '1px solid #e5e7eb' }}><a href="/register" style={{ display: 'inline-flex', padding: '14px 32px', fontSize: 15, fontWeight: 700, borderRadius: 999, background: '#6366f1', color: '#fff', textDecoration: 'none', fontFamily: "'Satoshi', sans-serif" }}>Start Free Trial →</a></div>
+
 
       {/* ─── FAQ SECTION ───────────────────────────── */}
       <LazySection><FAQSection /></LazySection>

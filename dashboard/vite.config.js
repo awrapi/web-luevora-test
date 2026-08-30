@@ -3,6 +3,22 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
+// Custom plugin to silently handle browser extension security/anti-miner probes
+const ignoreWasmProbesPlugin = () => ({
+  name: 'ignore-wasm-probes',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      if (req.url && (req.url.includes('miner-wasm-probe') || req.url.includes('.wasm?'))) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Not found');
+        return;
+      }
+      next();
+    });
+  },
+})
+
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
@@ -11,11 +27,15 @@ export default defineConfig({
     },
   },
   plugins: [
+    ignoreWasmProbesPlugin(),
     react(),
     tailwindcss(),
   ],
   server: {
     allowedHosts: true,
+    hmr: {
+      overlay: false, // Prevent error overlay popups on client screens
+    },
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',

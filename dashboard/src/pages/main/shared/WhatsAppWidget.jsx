@@ -19,7 +19,7 @@ const WhatsAppWidget = () => {
         flexDirection: 'column',
         alignItems: 'flex-end',
         gap: '12px',
-        fontFamily: "'Satoshi', 'Inter', sans-serif",
+        fontFamily: "'Satoshi', sans-serif",
         pointerEvents: 'auto',
       }}
     >
