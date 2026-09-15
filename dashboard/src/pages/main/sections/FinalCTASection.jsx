@@ -32,7 +32,7 @@ const FinalCTASection = () => {
           No credit card required. Cancel anytime.
         </p>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/register" style={{
+          <a href="/login" style={{
             display: 'inline-flex', padding: '16px 34px', fontSize: 16, fontWeight: 700,
             borderRadius: 999, background: '#6366f1', color: '#fff', textDecoration: 'none',
             fontFamily: "'Satoshi', sans-serif", transition: 'transform 0.2s',

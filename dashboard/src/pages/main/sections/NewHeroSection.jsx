@@ -167,7 +167,7 @@ const NewHeroSection = () => {
               }}
             >
               <a
-                href="/register"
+                href="/login"
                 className="solid-btn-primary"
                 style={{ textDecoration: 'none' }}
               >

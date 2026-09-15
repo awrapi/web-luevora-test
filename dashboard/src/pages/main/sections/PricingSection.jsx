@@ -192,7 +192,7 @@ const PricingSection = () => {
               </div>
               {/* Button */}
               {tier.hl ? (
-                <a href="/register" style={{
+                <a href="/login" style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   height: 50, borderRadius: 14, fontSize: 15, fontWeight: 700,
                   background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
@@ -204,7 +204,7 @@ const PricingSection = () => {
                   Get Started
                 </a>
               ) : (
-                <a href="/register" style={{
+                <a href="/login" style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   height: 50, borderRadius: 14, fontSize: 15, fontWeight: 700,
                   background: '#fff', color: '#0f172a',

@@ -172,9 +172,14 @@ const Login = () => {
             <div className="mt-8 text-center font-['Satoshi']">
               <p className="text-sm text-slate-500 font-medium">
                 Don't have an account?{' '}
-                <Link to="/register" className="text-[#4f46e5] font-bold hover:underline">
-                  Create an account
-                </Link>
+                <a
+                  href={`https://wa.me/6285693441047?text=${encodeURIComponent('Halo Luevora AI, saya ingin mendaftar dan membuat akun baru.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#25D366] font-bold hover:underline"
+                >
+                  Talk to Agent for Register
+                </a>
               </p>
             </div>
 

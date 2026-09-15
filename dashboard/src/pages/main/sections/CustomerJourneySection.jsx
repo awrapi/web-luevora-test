@@ -300,7 +300,7 @@ const CustomerJourneySection = () => {
                   fontFamily: "'Satoshi', sans-serif",
                   boxShadow: '0 10px 25px -5px rgba(15, 23, 42, 0.25)',
                 }}
-                onClick={() => (window.location.href = '/register')}
+                onClick={() => (window.location.href="/login"
               >
                 Start Free Trial
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
