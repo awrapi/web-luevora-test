@@ -134,7 +134,7 @@ const DataMigrationSection = () => {
               >
                 <img
                   id="dm-main-img"
-                  src="/assets/data-migration.png"
+                  src="/assets/data-migration.webp"
                   alt="Data Migration Dashboard"
                   ref={actualImgRef}
                   onLoad={() => setImgLoaded(true)}

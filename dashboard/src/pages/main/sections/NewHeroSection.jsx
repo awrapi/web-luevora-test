@@ -217,7 +217,7 @@ const NewHeroSection = () => {
           }}
         >
           <img
-            src="/assets/landingpage/maindashboard.png"
+            src="/assets/landingpage/maindashboard.webp"
             alt="Luevora Main Dashboard Background"
             style={{
               width: '100%',

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const MARKETING_IMAGES = [
-  { src: '/assets/landingpage/marketingspace.png',     alt: 'Marketing Space' },
-  { src: '/assets/landingpage/marketingdashboard.png', alt: 'Marketing Dashboard' },
+  { src: '/assets/landingpage/marketingspace.webp',     alt: 'Marketing Space' },
+  { src: '/assets/landingpage/marketingdashboard.webp', alt: 'Marketing Dashboard' },
 ];
 
 const MarketingSpaceSection = () => {

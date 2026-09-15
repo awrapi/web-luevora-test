@@ -170,14 +170,14 @@ const Plans = () => {
               Dapatkan paket Enterprise dengan kredit tak terbatas, integrasi custom, dedicated infrastructure, dan SLA premium yang disesuaikan untuk kebutuhan bisnis Anda.
             </p>
             <a
-              href="mailto:contact@luevora.com?subject=Enterprise%20Plan%20Request&body=Halo%20Tim%20Luevora%2C%0A%0ASaya%20tertarik%20dengan%20paket%20Enterprise.%20Mohon%20informasi%20lebih%20lanjut.%0A%0ATerima%20kasih."
+              href="mailto:info@luevora.com?subject=Enterprise%20Plan%20Request&body=Halo%20Tim%20Luevora%2C%0A%0ASaya%20tertarik%20dengan%20paket%20Enterprise.%20Mohon%20informasi%20lebih%20lanjut.%0A%0ATerima%20kasih."
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-[14px] text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg shadow-purple-500/25 transition-all active:scale-95"
             >
               <Icon name="Mail" size={16} />
               Hubungi Tim Enterprise
             </a>
             <p className="text-[11px] text-slate-400 mt-3">
-              atau email langsung ke <span className="font-semibold">contact@luevora.com</span>
+              atau email langsung ke <span className="font-semibold">info@luevora.com</span>
             </p>
           </div>
         </div>

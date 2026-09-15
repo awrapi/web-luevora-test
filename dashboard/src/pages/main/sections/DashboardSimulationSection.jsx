@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // Gambar dashboard ukuran 2270 x 1344
-const DASHBOARD_IMAGE_SRC = '/assets/landingpage/leadsinbox.png';
+const DASHBOARD_IMAGE_SRC = '/assets/landingpage/leadsinbox.webp';
 
 const DashboardSimulationSection = () => {
   const sectionRef = useRef(null);

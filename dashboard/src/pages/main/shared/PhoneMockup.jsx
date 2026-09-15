@@ -101,7 +101,7 @@ const PhoneMockup = () => {
             }}
           >
             <img
-              src="/assets/phones.png?v=3"
+              src="/assets/phones.webp?v=3"
               alt="Luevora App Mockup"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}

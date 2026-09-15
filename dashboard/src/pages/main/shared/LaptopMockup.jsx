@@ -163,7 +163,7 @@ const LaptopMockup = () => {
             }}
           >
             <img
-              src="/assets/landingpage/maindashboard.png"
+              src="/assets/landingpage/maindashboard.webp"
               alt="Luevora Dashboard"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}

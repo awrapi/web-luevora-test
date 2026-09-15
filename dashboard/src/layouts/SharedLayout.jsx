@@ -93,7 +93,7 @@ const SharedLayout = ({ extraWidgets = null }) => {
       if (context === 'desktop-button') return null; // hide orange button
       return (
         <a
-          href="mailto:contact@luevora.com?subject=Enterprise%20Plan%20Request"
+          href="mailto:info@luevora.com?subject=Enterprise%20Plan%20Request"
           onClick={() => { setShowUserMenu(false); setShowMoreMenu(false); }}
           className={
             context === 'dropdown'

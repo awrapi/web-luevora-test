@@ -166,7 +166,7 @@ const MultiPlatformSection = () => {
           >
             <img
               id="mp-main-img"
-              src="/assets/multiplatform.png"
+              src="/assets/multiplatform.webp"
               alt="Multi-Platform Agent"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}

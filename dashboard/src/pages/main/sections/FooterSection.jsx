@@ -18,10 +18,10 @@ const FooterSection = () => {
     }}>
       {/* Left Column */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: '1 1 300px' }}>
-        <p style={{ margin: 0, fontSize: '13px', color: '#e0e0e0', fontWeight: 600 }}>Luevora - Your First AI Employee. &nbsp;|&nbsp; Contact us: contact@luevora.com</p>
+        <p style={{ margin: 0, fontSize: '13px', color: '#e0e0e0', fontWeight: 600 }}>Luevora - Your First AI Employee. &nbsp;|&nbsp; Contact us: info@luevora.com</p>
         <p style={{ margin: 0, fontSize: '13px', color: '#e0e0e0', fontWeight: 600 }}>&copy; 2026 Luevora AI. All rights reserved</p>
         <div className="lp-footer-logo-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
-          <img src="/luevora.png" alt="Luevora Logo" loading="lazy" style={{ width: '20px', height: '20px' }} />
+          <img src="/luevora.webp" alt="Luevora Logo" loading="lazy" style={{ width: '20px', height: '20px' }} />
           <span style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Luevora AI | Empowering your business frontline</span>
         </div>
       </div>

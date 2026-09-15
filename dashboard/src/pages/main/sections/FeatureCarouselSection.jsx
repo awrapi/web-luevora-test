@@ -19,7 +19,7 @@ const MultiPlatformVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       <div ref={ref} onMouseEnter={() => setHov(true)} onMouseLeave={() => { setHov(false); setTilt({ x: 0, y: 0 }); }} onMouseMove={onMove}
         style={{ width: '100%', maxWidth: '440px', animation: hov ? 'none' : 'fc-float 7s ease-in-out infinite', transform: hov ? `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.03)` : undefined, transition: hov ? 'transform 0.08s linear' : 'transform 0.7s ease', cursor: 'default' }}>
-        <img src="/assets/multiplatform.png" alt="Multi-Platform Agent" onLoad={() => setLoaded(true)}
+        <img src="/assets/multiplatform.webp" alt="Multi-Platform Agent" onLoad={() => setLoaded(true)}
           style={{ width: '100%', maxHeight: '340px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', opacity: loaded ? 1 : 0.8, transition: 'opacity 0.4s ease' }} />
       </div>
     </div>
@@ -42,7 +42,7 @@ const DataMigrationVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       <div ref={ref} onMouseEnter={() => setHov(true)} onMouseLeave={() => { setHov(false); setTilt({ x: 0, y: 0 }); }} onMouseMove={onMove}
         style={{ width: '100%', maxWidth: '560px', animation: hov ? 'none' : 'fc-float 7s ease-in-out infinite', transform: hov ? `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)` : undefined, transition: hov ? 'transform 0.08s linear' : 'transform 0.7s ease', cursor: 'default' }}>
-        <img src="/assets/data-migration.png" alt="Data Migration Dashboard" onLoad={() => setLoaded(true)}
+        <img src="/assets/data-migration.webp" alt="Data Migration Dashboard" onLoad={() => setLoaded(true)}
           style={{ width: '100%', maxHeight: '420px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', opacity: loaded ? 1 : 0.8, transition: 'opacity 0.4s ease' }} />
       </div>
     </div>
@@ -56,7 +56,7 @@ const CustomJobWorkflowVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       {!imgError ? (
         <img
-          src="/assets/landingpage/jobsystem.png"
+          src="/assets/landingpage/jobsystem.webp"
           alt="Custom Job Workflow"
           onError={() => setImgError(true)}
           style={{ width: '100%', maxHeight: '380px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', borderRadius: '12px' }}
@@ -97,7 +97,7 @@ const CustomTableVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       {!imgError ? (
         <img
-          src="/assets/landingpage/customtable.png"
+          src="/assets/landingpage/customtable.webp"
           alt="Custom Table"
           onError={() => setImgError(true)}
           style={{ width: '100%', maxHeight: '380px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', borderRadius: '12px' }}
@@ -138,7 +138,7 @@ const McpConnectorVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       {!imgError ? (
         <img
-          src="/assets/landingpage/mcp.png"
+          src="/assets/landingpage/mcp.webp"
           alt="MCP Connector"
           onError={() => setImgError(true)}
           style={{ width: '100%', maxHeight: '380px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', borderRadius: '12px' }}
@@ -177,7 +177,7 @@ const AutoInvoiceVisual = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
       {!imgError ? (
         <img
-          src="/assets/landingpage/invoicereceipt.png"
+          src="/assets/landingpage/invoicereceipt.webp"
           alt="Auto Invoice and Receipt"
           onError={() => setImgError(true)}
           style={{ width: '100%', maxHeight: '380px', objectFit: 'contain', display: 'block', userSelect: 'none', pointerEvents: 'none', borderRadius: '12px' }}
@@ -352,23 +352,23 @@ const FeatureCarouselSection = () => {
     return () => obs.disconnect();
   }, []);
 
-  const PEEK   = Math.max(60, Math.min(130, cw * 0.10));
+  const mob    = cw < 600;
+  const PEEK   = mob ? 0 : Math.max(60, Math.min(130, cw * 0.10));
   const GAP    = 24;
   const CARD_W = cw - 2 * PEEK;
-  const CARD_H = 460;
+  const CARD_H = mob ? 'auto' : 460;
 
   const navigate = useCallback((dir) => {
     if (isSliding) return;
+    if (mob) { setCurrentIndex(i => mod(i + dir, N)); return; }
     setIsSliding(true);
-    // All cards slide in unison via shared slideOffset
     setSlideOffset(dir * -(CARD_W + GAP));
     setTimeout(() => {
-      // Instantly update index + snap back (no transition since isSliding→false)
       setCurrentIndex(i => mod(i + dir, N));
       setSlideOffset(0);
       setIsSliding(false);
     }, 420);
-  }, [isSliding, CARD_W, GAP]);
+  }, [isSliding, mob, CARD_W, GAP]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -415,7 +415,22 @@ const FeatureCarouselSection = () => {
         .fc-nav-btn:active { transform: translateY(0); }
         .fc-visual-inner .lp-chatops-phone-wrap { min-height: unset !important; height: 430px !important; max-width: 380px !important; margin: 0 auto !important; }
         .fc-visual-inner .lp-agent-mockup-wrap  { min-height: unset !important; height: 350px !important; max-width: 520px !important; margin: 0 auto !important; }
+        @media (max-width: 599px) {
+          .fc-card-content {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: auto auto !important;
+            gap: 20px !important;
+            align-items: start !important;
+          }
+          .fc-card-visual {
+            height: 200px !important;
+            min-height: unset !important;
+          }
+          .fc-visual-inner .lp-chatops-phone-wrap { height: 180px !important; }
+          .fc-visual-inner .lp-agent-mockup-wrap  { height: 180px !important; }
+        }
       `}</style>
+
 
       {/* ─── HEADLINE ─── */}
       <div
@@ -464,7 +479,7 @@ const FeatureCarouselSection = () => {
         style={{
           maxWidth: '1300px',
           margin: '0 auto',
-          padding: '0 40px',
+          padding: mob ? '0 12px' : '0 40px',
           boxSizing: 'border-box',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'none' : 'translateY(20px)',
@@ -472,35 +487,18 @@ const FeatureCarouselSection = () => {
         }}
       >
         {/* overflow:hidden clips the peeking prev/next cards */}
-        <div style={{ position: 'relative', width: '100%', height: `${CARD_H}px`, overflow: 'hidden' }}>
+        <div style={{ position: 'relative', width: '100%', height: mob ? 'auto' : `${CARD_H}px`, overflow: mob ? 'visible' : 'hidden' }}>
 
           {/*
             Render ALL slides keyed by slide.id.
             This means Visual components are ALWAYS mounted — never remounted on transition.
             No blank flash when a card becomes active.
           */}
-          {/* Left fade overlay */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '160px',
-            height: '100%',
-            background: 'linear-gradient(to right, #000000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
-            zIndex: 20,
-            pointerEvents: 'none',
-          }} />
-          {/* Right fade overlay */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '160px',
-            height: '100%',
-            background: 'linear-gradient(to left, #000000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
-            zIndex: 20,
-            pointerEvents: 'none',
-          }} />
+          {/* Left/Right fade overlays — desktop only */}
+          {!mob && <>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '160px', height: '100%', background: 'linear-gradient(to right, #000000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)', zIndex: 20, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: 0, right: 0, width: '160px', height: '100%', background: 'linear-gradient(to left, #000000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)', zIndex: 20, pointerEvents: 'none' }} />
+          </>}
 
           {SLIDES.map((slide, i) => {
             // Shortest-path distance around the ring [-N/2 … N/2)
@@ -519,69 +517,78 @@ const FeatureCarouselSection = () => {
                 key={slide.id}
                 onClick={isPrev ? () => navigate(-1) : isNext ? () => navigate(1) : undefined}
                 style={{
-                  position: 'absolute',
+                  position: mob ? (isActive ? 'relative' : 'absolute') : 'absolute',
                   top: 0,
-                  left: PEEK,
+                  left: mob ? 0 : PEEK,
                   width: CARD_W,
-                  height: CARD_H,
-                  transform: `translateX(${x}px)`,
-                  transition: SLIDE_TRANSITION,
+                  height: mob ? 'auto' : CARD_H,
+                  transform: mob ? undefined : `translateX(${x}px)`,
+                  transition: mob ? 'opacity 0.3s ease' : SLIDE_TRANSITION,
+                  opacity: mob ? (isActive ? 1 : 0) : 1,
+                  pointerEvents: mob && !isActive ? 'none' : undefined,
+                  display: mob && !isActive ? 'none' : undefined,
                   background: slide.bg,
-                  borderRadius: '24px',
+                  borderRadius: '20px',
                   border: 'none',
                   boxShadow: isActive
                     ? '0 32px 80px -16px rgba(0,0,0,0.38), 0 12px 32px -8px rgba(0,0,0,0.20)'
                     : '0 12px 40px -8px rgba(0,0,0,0.30), 0 4px 12px -2px rgba(0,0,0,0.15)',
                   boxSizing: 'border-box',
-                  padding: isActive ? '36px 44px' : '28px 32px',
+                  padding: mob ? '24px 20px' : isActive ? '36px 44px' : '28px 32px',
                   overflow: 'hidden',
                   filter: isActive ? 'none' : 'brightness(0.78)',
                   cursor: !isActive ? 'pointer' : 'default',
                   zIndex: isActive ? 10 : 2,
                 }}
               >
-                {/* White gloss overlay (z-index: 0, below content) */}
+                {/* White gloss overlay */}
                 <div style={{
-                  position: 'absolute', inset: 0, borderRadius: '24px',
+                  position: 'absolute', inset: 0, borderRadius: '20px',
                   pointerEvents: 'none', zIndex: 0,
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0) 65%)',
                 }} />
 
-                {/* Card content (z-index: 1 → above gloss) */}
-                <div style={{
-                  position: 'relative',
-                  zIndex: 1,
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1.1fr',
-                  gap: '40px',
-                  alignItems: 'center',
-                  height: '100%',
-                  minHeight: '380px',
-                }}>
+                {/* Card content */}
+                <div
+                  className="fc-card-content"
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    display: mob ? 'flex' : 'grid',
+                    flexDirection: mob ? 'column' : undefined,
+                    gridTemplateColumns: mob ? undefined : '1fr 1.1fr',
+                    gap: mob ? '16px' : '40px',
+                    alignItems: mob ? 'stretch' : 'center',
+                    height: '100%',
+                    minHeight: mob ? 'unset' : '380px',
+                    overflow: 'hidden',
+                  }}>
                   {/* Text */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: mob ? '10px' : '16px' }}>
                     <h2 style={{
-                      fontSize: 'clamp(22px, 2.4vw, 34px)',
+                      fontSize: mob ? '20px' : 'clamp(22px, 2.4vw, 34px)',
                       fontWeight: 800, color: slide.titleColor,
                       margin: 0, lineHeight: 1.25, letterSpacing: '-0.025em',
                     }}>
                       {slide.title}
                     </h2>
                     {slide.body.map((p, pi) => (
-                      <p key={pi} style={{ fontSize: 'clamp(13px, 1vw, 15px)', color: slide.bodyColor, lineHeight: 1.75, margin: 0 }}>
+                      <p key={pi} style={{ fontSize: mob ? '12px' : 'clamp(13px, 1vw, 15px)', color: slide.bodyColor, lineHeight: mob ? 1.65 : 1.75, margin: 0 }}>
                         {p}
                       </p>
                     ))}
                   </div>
 
-                  {/* Visual — ALWAYS visible, never hidden. Side cards are clipped + darkened anyway. */}
-                  <div style={{
+                  {/* Visual */}
+                  <div className="fc-card-visual" style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '100%',
-                    minHeight: '340px',
+                    height: mob ? 'auto' : '100%',
+                    minHeight: mob ? 0 : '340px',
+                    maxHeight: mob ? '240px' : undefined,
                     width: '100%',
+                    overflow: 'hidden',
                   }}>
                     <div className="fc-visual-inner" style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Visual />

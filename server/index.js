@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import routes from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.middleware.js';
 import path from 'path';
@@ -30,6 +31,7 @@ app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3001;
 
 // Middlewares
+app.use(compression()); // gzip/brotli compress all responses
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
@@ -38,8 +40,8 @@ app.use('/api', routes);
 
 // Static file serving for uploads (PDFs, images, media)
 // Serve both server-local uploads (invoices, receipts, wa_media) and project-root uploads (package-media, kb-media)
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads'), { maxAge: '7d' }));
 
 // RAG Playground test page
 app.get('/test-rag', (req, res) => {

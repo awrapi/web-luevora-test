@@ -154,7 +154,7 @@ const AgentTalkMockup = () => {
             overflow: 'hidden',
           }}>
             <img
-              src="/assets/agent-talk.png"
+              src="/assets/agent-talk.webp"
               alt="Agent Talk Session Illustration"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}

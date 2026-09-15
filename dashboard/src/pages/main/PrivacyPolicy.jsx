@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
       {/* Header */}
       <header style={{ padding: '20px 40px', borderBottom: '1px solid #eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/luevora.png" alt="Luevora Logo" style={{ width: '30px', height: '30px' }} />
+          <img src="/luevora.webp" alt="Luevora Logo" style={{ width: '30px', height: '30px' }} />
           <span style={{ fontSize: '20px', fontWeight: 800, color: '#0d0d1a', letterSpacing: '-0.02em' }}>
             LUEVORA AI
           </span>

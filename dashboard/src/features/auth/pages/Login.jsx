@@ -41,7 +41,7 @@ const Login = () => {
         style={{
           position: 'absolute',
           inset: '-24px',
-          backgroundImage: "url('/assets/login-bg.png')",
+          backgroundImage: "url('/assets/login-bg.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -91,7 +91,7 @@ const Login = () => {
             {/* Brand Header */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-14 h-14 mb-4">
-                <img src="/assets/logo.png" alt="Luevora Logo" className="w-full h-full object-contain" />
+                <img src="/assets/logo.webp" alt="Luevora Logo" className="w-full h-full object-contain" />
               </div>
               
               <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2 font-['Satoshi']">

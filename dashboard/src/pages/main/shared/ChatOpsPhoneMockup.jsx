@@ -82,7 +82,7 @@ const ChatOpsPhoneMockup = () => {
             transformStyle: 'preserve-3d', willChange: 'transform',
             backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
             <img
-              src="/assets/chatops-phone.png"
+              src="/assets/chatops-phone.webp"
               alt="ChatOps Assistant Phone"
               ref={actualImgRef}
               onLoad={() => setImgLoaded(true)}

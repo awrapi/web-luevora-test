@@ -27,7 +27,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} style={{
+    <section ref={sectionRef} id="faq" style={{
       width: '100%', backgroundColor: '#ffffff', padding: '96px 20px',
       borderTop: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -102,7 +102,7 @@ const FAQSection = () => {
           opacity: isVisible ? 1 : 0, transition: 'opacity 0.6s ease 0.3s',
         }}>
           Can't find what you are looking for? Contact our{' '}
-          <a href="mailto:contact@luevora.com" style={{ color: '#6366f1', fontWeight: 600, textDecoration: 'none' }}>
+          <a href="mailto:info@luevora.com" style={{ color: '#6366f1', fontWeight: 600, textDecoration: 'none' }}>
             support team
           </a>
         </p>

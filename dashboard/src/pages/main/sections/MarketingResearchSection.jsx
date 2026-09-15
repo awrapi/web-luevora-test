@@ -72,7 +72,7 @@ const MarketingResearchSection = () => {
         }}>
           {!imgError ? (
             <img
-              src="/assets/landingpage/resultresearch1.png"
+              src="/assets/landingpage/resultresearch1.webp"
               alt="Marketing Research Result"
               onError={() => setImgError(true)}
               style={{
